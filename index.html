@@ -1,134 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Private ❤️</title>
+<meta charset="UTF-8">
+<title> UR DAY❤️</title>
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-      background: black;
-    }
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  background: black;
+}
 
-    /* ❤️ Animated Hearts Background */
-    body::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: url("https://i.imgur.com/9bK0K7C.png");
-      animation: move 20s linear infinite;
-      opacity: 0.3;
-    }
+/* ❤️ Animated Hearts Background */
+body::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("https://i.imgur.com/9bK0K7C.png");
+  animation: move 20s linear infinite;
+  opacity: 0.3;
+}
 
-    @keyframes move {
-      from { background-position: 0 0; }
-      to { background-position: 0 1000px; }
-    }
+@keyframes move {
+  from { background-position: 0 0; }
+  to { background-position: 0 1000px; }
+}
 
-    /* 💎 Glass Box */
-    .box {
-      position: relative;
-      z-index: 1;
-      background: rgba(255, 0, 80, 0.15);
-      backdrop-filter: blur(15px);
-      padding: 40px;
-      border-radius: 25px;
-      text-align: center;
-      box-shadow: 0 0 40px rgba(255,0,80,0.7);
-    }
+/* 💎 Glass Box */
+.box {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 0, 80, 0.15);
+  backdrop-filter: blur(15px);
+  padding: 40px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255,0,80,0.7);
+}
 
-    h2 {
-      margin-bottom: 20px;
-      color: #ff4d6d;
-      font-size: 28px;
-    }
+h2 {
+  margin-bottom: 20px;
+  color: #ff4d6d;
+  font-size: 28px;
+}
 
-    input {
-      padding: 12px;
-      width: 250px;
-      border-radius: 12px;
-      border: none;
-      outline: none;
-      font-size: 16px;
-      text-align: center;
-    }
+input {
+  padding: 12px;
+  width: 250px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+}
 
-    .buttons {
-      margin-top: 25px;
-    }
+/* 📦 BUTTON CONTAINER */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  margin-top: 25px;
+}
 
-    button {
-      padding: 12px 25px;
-      margin: 10px;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+/* 🔘 COMMON BUTTON */
+.buttons button {
+  width: 45%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-    /* ✅ OK Button */
-    .ok {
-      background: linear-gradient(45deg, #ff4d6d, #ff1f4d);
-      color: white;
-      box-shadow: 0 0 15px #ff4d6d;
-    }
+/* ❌ Cancel LEFT */
+.cancel {
+  background: #222;
+  color: #ccc;
+}
 
-    .ok:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 25px #ff4d6d;
-    }
+.cancel:hover {
+  background: #444;
+  transform: scale(1.1);
+}
 
-    /* ❌ Cancel Button */
-    .cancel {
-      background: #222;
-      color: #ccc;
-    }
+/* ✅ OK RIGHT */
+.ok {
+  background: linear-gradient(45deg, #ff4d6d, #ff1f4d);
+  color: white;
+  box-shadow: 0 0 15px #ff4d6d;
+}
 
-    .cancel:hover {
-      background: #444;
-      transform: scale(1.1);
-    }
-  </style>
+.ok:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #ff4d6d;
+}
+</style>
 
 </head>
 
 <body>
 
-  <div class="box">
-    <h2>Enter Password ❤️</h2>
+<div class="box">
+  <h2>Enter Password❤️</h2>
 
-    <input type="password" id="password" placeholder="Enter password">
+  <input type="password" id="password" placeholder="Enter password">
 
-    <div class="buttons">
-      <button class="ok" onclick="checkPassword()">OK</button>
-      <button class="cancel" onclick="goBack()">Cancel</button>
-    </div>
+  <!-- 🔘 BUTTONS -->
+  <div class="buttons">
+    <button class="cancel" onclick="goBack()">Cancel</button>
+    <button class="ok" onclick="checkPassword()">OK</button>
   </div>
+</div>
 
-  <script>
-    function checkPassword() {
-      const correctPassword = "khusheadii";
-      const input = document.getElementById("password").value;
+<script>
+function checkPassword() {
+  const correctPassword = "khusheadii";
+  const input = document.getElementById("password").value;
 
-      if (input === correctPassword) {
-        window.location.href = "birthday.html";
-      } else {
-        alert("Wrong Password ❌");
-      }
-    }
+  if (input === correctPassword) {
+    window.location.href = "birthday.html";
+  } else {
+    alert("Wrong Password ❌");
+  }
+}
 
-    function goBack() {
-      window.history.back();
-    }
-  </script>
+function goBack() {
+  window.history.back();
+}
+</script>
 
 </body>
 </html>
