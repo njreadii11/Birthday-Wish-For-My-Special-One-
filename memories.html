@@ -62,15 +62,17 @@ video {
 <body>
 
 <!-- 🎬 VIDEO -->
-<video autoplay muted loop>
+<video id="video" autoplay loop controls>
   <source src="video.mp4" type="video/mp4">
 </video>
 
-<div class="overlay">
-  <div class="text" id="text"></div>
-</div>
-
 <script>
+window.onload = function(){
+  let v = document.getElementById("video");
+  v.muted = false;
+  v.play();
+}
+</script>
 const lines = [
   "Some memories are not meant to fade away… 💖",
   "They stay quietly in the heart, no matter how far we go.",
