@@ -4,15 +4,18 @@
 <meta charset="UTF-8">
 <title>Memories 💖</title>
 
+<!-- 🔥 Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300&display=swap" rel="stylesheet">
+
 <style>
 body {
   margin: 0;
   overflow: hidden;
-  font-family: Arial;
+  font-family: 'Poppins', sans-serif;
   color: white;
 }
 
-/* 🎬 VIDEO (BLUR + ZOOM) */
+/* 🎬 VIDEO FULL SCREEN FIX */
 video {
   position: fixed;
   top: 0;
@@ -22,13 +25,13 @@ video {
   object-fit: cover;
   z-index: -1;
 
-  filter: blur(3px);
+  filter: blur(4px);
   animation: zoom 20s infinite alternate ease-in-out;
 }
 
 @keyframes zoom {
   from { transform: scale(1); }
-  to { transform: scale(1.1); }
+  to { transform: scale(1.15); }
 }
 
 /* 💖 OVERLAY */
@@ -36,26 +39,36 @@ video {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.65);
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-/* 💌 TEXT */
+/* 💌 TEXT BOX */
 .text {
-  max-width: 800px;
-  font-size: 24px;
-  line-height: 1.8;
+  max-width: 900px;
+  padding: 20px;
 }
 
-/* ✨ LINE ANIMATION */
+/* ✨ LINE STYLE (ATTRACTIVE) */
 .line {
   opacity: 0;
   transform: translateY(20px);
-  margin: 10px 0;
-  animation: fade 1s forwards;
+  margin: 12px 0;
+  font-size: 26px;
+
+  /* 💖 Stylish font */
+  font-family: 'Great Vibes', cursive;
+
+  /* 🔥 Glow effect */
+  color: #fff;
+  text-shadow: 0 0 10px #ff4d6d,
+               0 0 20px #ff4d6d,
+               0 0 30px #ff1f4d;
+
+  animation: fade 1.2s ease forwards;
 }
 
 @keyframes fade {
@@ -67,14 +80,16 @@ video {
 
 /* 💔 FINAL TYPING */
 .typing {
-  font-size: 28px;
+  font-size: 32px;
   margin-top: 30px;
+  font-family: 'Great Vibes', cursive;
+  color: #ff4d6d;
+  text-shadow: 0 0 10px #ff4d6d;
+
   border-right: 3px solid white;
   white-space: nowrap;
   overflow: hidden;
   width: 0;
-  margin-left: auto;
-  margin-right: auto;
 }
 </style>
 </head>
@@ -82,7 +97,7 @@ video {
 <body>
 
 <!-- 🎬 VIDEO -->
-<video id="video" autoplay loop>
+<video id="video" loop playsinline>
   <source src="video.mp4" type="video/mp4">
 </video>
 
@@ -91,27 +106,27 @@ video {
 </div>
 
 <script>
-// 🔊 SOUND FIX
+// 🔊 SOUND + PLAY FIX (CLICK REQUIRED)
 document.body.addEventListener("click", function(){
   let v = document.getElementById("video");
   v.muted = false;
   v.play();
 });
 
-// 💌 LINES
+// 💌 TEXT LINES
 const lines = [
-  "Some memories are not meant to fade away… 💖",
-  "They stay quietly in the heart, no matter how far we go.",
-  "We may not talk anymore, we may not be together…",
-  "but those moments we shared were real, and they meant everything.",
-  "Every smile, every laugh, every little fight…",
-  "they are still alive somewhere inside me.",
-  "I don’t regret loving you… not even for a second.",
-  "Because for a moment, you were my whole world.",
-  "And even today, when I think about those days…",
-  "I don’t feel pain… I feel something beautiful.",
-  "Because not all love stories are meant to stay forever…",
-  "some are just meant to be remembered. 💔"
+"Some memories are not meant to fade away…💖",
+"They stay quietly in the heart, no matter how far we go.",
+"We may not talk anymore, we may not be together…",
+"but those moments we shared were real, and they meant everything.",
+"Every smile, every laugh, every little fight…",
+"they are still alive somewhere inside me.",
+"I don’t regret loving you… not even for a second.",
+"Because for a moment, you were my whole world.",
+"And even today, when I think about those days…",
+"I don’t feel pain… I feel something beautiful.",
+"Because not all love stories are meant to stay forever…",
+"some are just meant to be remembered.💔"
 ];
 
 let i = 0;
@@ -125,13 +140,13 @@ function showLine(){
     i++;
     setTimeout(showLine, 2500);
   } else {
-    showFinalTyping(); // 👇 last message
+    showFinalTyping();
   }
 }
 
 showLine();
 
-// 💔 FINAL TYPING EFFECT
+// 💔 FINAL TYPING
 function showFinalTyping(){
   let div = document.createElement("div");
   div.className = "typing";
@@ -144,10 +159,9 @@ function showFinalTyping(){
     if(j < text.length){
       div.innerHTML += text.charAt(j);
       j++;
-      setTimeout(type, 100);
+      setTimeout(type, 120);
     }
   }
-
   type();
 }
 </script>
