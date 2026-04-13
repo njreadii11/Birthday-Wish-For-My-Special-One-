@@ -8,25 +8,33 @@
 body {
   margin: 0;
   height: 100vh;
+  overflow: hidden;
+  background: black;
+  font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
-  background: black;
-  overflow: hidden;
 }
 
-/* 💔 BACKGROUND TEXT */
-body::before {
-  content: "u r my incomplete wish 💔";
+/* 💔 SCROLLING TEXT BACKGROUND */
+.background-text {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 50px;
+  width: 100%;
+  height: 200%;
   color: rgba(255,255,255,0.08);
+  font-size: 40px;
   text-align: center;
-  letter-spacing: 3px;
+  line-height: 80px;
+  animation: scrollText 10s linear infinite;
+}
+
+@keyframes scrollText {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(-50%);
+  }
 }
 
 /* 💖 BOX */
@@ -47,10 +55,9 @@ input {
   border: none;
   outline: none;
   margin-top: 10px;
-  width: 200px;
 }
 
-/* 🔘 BUTTONS */
+/* 🔘 BUTTON */
 button {
   padding: 10px 20px;
   margin: 10px;
@@ -60,15 +67,40 @@ button {
   color: white;
   cursor: pointer;
 }
-
-button:hover {
-  transform: scale(1.05);
-}
 </style>
 </head>
 
 <body>
 
+<!-- 💔 REPEATED TEXT -->
+<div class="background-text">
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔<br>
+  u r my incomplete luv 💔
+</div>
+
+<!-- 🔐 PASSWORD BOX -->
 <div class="box">
   <h2>Enter Password ❤️</h2>
   <input type="password" id="password">
