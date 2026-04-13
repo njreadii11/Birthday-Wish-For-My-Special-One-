@@ -8,11 +8,33 @@
 body {
   margin: 0;
   height: 100vh;
-  background: linear-gradient(135deg, #ff4d6d, #000);
   font-family: Arial;
   color: white;
   text-align: center;
   overflow: hidden;
+
+  /* 📸 FULL BACKGROUND IMAGE */
+  background: url("photo.jpg") no-repeat center center/cover;
+}
+
+/* 💖 Dark overlay */
+body::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  top: 0;
+  left: 0;
+}
+
+/* 💎 Content center */
+.container {
+  position: relative;
+  z-index: 2;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 20px;
 }
 
 /* ❤️ Heartbeat */
@@ -21,75 +43,32 @@ h1 {
   animation: beat 1s infinite;
 }
 @keyframes beat {
-  0%,100% { transform: scale(1); }
   50% { transform: scale(1.1); }
 }
 
-/* ✨ Typing Name */
-.typing {
+/* ✨ Name */
+.name {
   font-size: 35px;
-  border-right: 3px solid white;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-  margin: auto;
-  animation: typing 4s steps(20,end) forwards, blink 0.7s infinite;
-}
-@keyframes typing {
-  to { width: 300px; }
-}
-@keyframes blink {
-  50% { border-color: transparent; }
+  margin-top: 10px;
+  color: #ff4d6d;
 }
 
-/* 💌 Message typing */
+/* 💌 Full Message */
 .message {
-  width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  margin: auto;
-  margin-top: 20px;
-  animation: typing2 6s steps(60,end) forwards;
-}
-@keyframes typing2 {
-  to { width: 600px; }
-}
-
-/* 📸 Slideshow */
-.slideshow {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-.slideshow img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  animation: slide 15s infinite;
-}
-.slideshow img:nth-child(1){animation-delay:0s;}
-.slideshow img:nth-child(2){animation-delay:5s;}
-.slideshow img:nth-child(3){animation-delay:10s;}
-
-@keyframes slide {
-  0%{opacity:0;}
-  10%{opacity:1;}
-  30%{opacity:1;}
-  40%{opacity:0;}
-  100%{opacity:0;}
+  max-width: 700px;
+  margin: 20px auto;
+  font-size: 18px;
+  line-height: 1.7;
 }
 
 /* 🎈 Balloons */
 .balloon {
   position: absolute;
   bottom: -150px;
-  width: 60px;
-  height: 80px;
+  width: 50px;
+  height: 70px;
   border-radius: 50%;
-  animation: float 10s linear infinite;
+  animation: float 8s linear infinite;
 }
 .balloon::after {
   content:"";
@@ -97,7 +76,7 @@ h1 {
   height:50px;
   background:white;
   position:absolute;
-  top:80px;
+  top:70px;
   left:50%;
 }
 @keyframes float {
@@ -107,56 +86,42 @@ h1 {
 /* 🎊 Confetti */
 .confetti {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   top: -10px;
-  animation: fall 5s linear infinite;
+  animation: fall 4s linear infinite;
 }
 @keyframes fall {
   to { transform: translateY(110vh) rotate(360deg); }
 }
 
-.container {
-  position: relative;
-  top: 20%;
-}
 </style>
-
 </head>
 
 <body>
 
-<!-- 📸 Background Slideshow -->
-<div class="slideshow">
-  <img src="photo.jpg.jpg">
-</div>
-
 <div class="container">
   <h1>🎉 HAPPY BIRTHDAY ❤️</h1>
 
-  <div class="typing">Khusheadii 💖</div>
+  <div class="name">Khusheadii 💖</div>
 
   <div class="message">
-   You are still the most beautiful part of my life... 💖  
+    You are still the most beautiful part of my life... 💖  
 
-Even though we are not together anymore, there are some things that never really change.  
-The way I care about you, the way I silently wish for your happiness… it’s still the same.  
+    Even though we are not together anymore, there are some things that never really change.  
+    The way I care about you, the way I silently wish for your happiness… it’s still the same.  
 
-Maybe we lost what we once had, maybe life took us in different directions,  
-but the memories we created will always stay with me.  
+    Maybe we lost what we once had, maybe life took us in different directions,  
+    but the memories we created will always stay with me.  
 
-On your special day, I just want to say —  
-I truly hope you find all the happiness in this world,  
-all the love you deserve, and all the dreams you once talked about come true.  
+    On your special day, I just want to say —  
+    I truly hope you find all the happiness in this world,  
+    all the love you deserve, and all the dreams you once talked about come true.  
 
-You were never just a chapter in my life…  
-you were a feeling I will always remember.  
+    You were never just a chapter in my life…  
+    you were a feeling I will always remember.  
 
-No matter where life takes us,  
-a part of me will always wish the best for you.  
-
-Happy Birthday My Incompelete Luv… 💖  
-Stay happy, always.💖
+    Happy Birthday… 💖
   </div>
 </div>
 
@@ -167,22 +132,22 @@ Stay happy, always.💖
 
 <script>
 // 🎈 Balloons
-for(let i=0;i<12;i++){
+for(let i=0;i<15;i++){
  let b=document.createElement("div");
  b.className="balloon";
  b.style.left=Math.random()*100+"vw";
- b.style.background=["red","pink","yellow","blue"][Math.floor(Math.random()*4)];
- b.style.animationDuration=(6+Math.random()*5)+"s";
+ b.style.background=["#ff4d6d","#ff99ac","#ffcc00","#66ccff"][Math.floor(Math.random()*4)];
+ b.style.animationDuration=(5+Math.random()*5)+"s";
  document.body.appendChild(b);
 }
 
 // 🎊 Confetti
-for(let i=0;i<70;i++){
+for(let i=0;i<80;i++){
  let c=document.createElement("div");
  c.className="confetti";
  c.style.left=Math.random()*100+"vw";
- c.style.background=["red","yellow","blue","pink","white"][Math.floor(Math.random()*5)];
- c.style.animationDuration=(3+Math.random()*3)+"s";
+ c.style.background=["#ff4d6d","#fff","#ffcc00","#66ccff"][Math.floor(Math.random()*4)];
+ c.style.animationDuration=(3+Math.random()*2)+"s";
  document.body.appendChild(c);
 }
 </script>
