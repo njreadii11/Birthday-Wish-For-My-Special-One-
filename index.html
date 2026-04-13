@@ -1,127 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Private Page ❤️</title>
+  <meta charset="UTF-8">
+  <title>Private ❤️</title>
 
-<style>
-body {
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
-  background: black;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      background: black;
+    }
 
-/* 💔 SCROLLING TEXT BACKGROUND */
-.background-text {
-  position: absolute;
-  width: 100%;
-  height: 200%;
-  color: rgba(255,255,255,0.08);
-  font-size: 40px;
-  text-align: center;
-  line-height: 80px;
-  animation: scrollText 10s linear infinite;
-}
+    /* ❤️ Animated Hearts Background */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url("https://i.imgur.com/9bK0K7C.png");
+      animation: move 20s linear infinite;
+      opacity: 0.3;
+    }
 
-@keyframes scrollText {
-  from {
-    transform: translateY(0%);
-  }
-  to {
-    transform: translateY(-50%);
-  }
-}
+    @keyframes move {
+      from { background-position: 0 0; }
+      to { background-position: 0 1000px; }
+    }
 
-/* 💖 BOX */
-.box {
-  position: relative;
-  z-index: 2;
-  background: rgba(255, 0, 80, 0.2);
-  padding: 40px;
-  border-radius: 20px;
-  text-align: center;
-  backdrop-filter: blur(10px);
-}
+    /* 💎 Glass Box */
+    .box {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 0, 80, 0.15);
+      backdrop-filter: blur(15px);
+      padding: 40px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(255,0,80,0.7);
+    }
 
-/* 🔐 INPUT */
-input {
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  margin-top: 10px;
-}
+    h2 {
+      margin-bottom: 20px;
+      color: #ff4d6d;
+      font-size: 28px;
+    }
 
-/* 🔘 BUTTON */
-button {
-  padding: 10px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 10px;
-  background: #ff4d6d;
-  color: white;
-  cursor: pointer;
-}
-</style>
+    input {
+      padding: 12px;
+      width: 250px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .buttons {
+      margin-top: 25px;
+    }
+
+    button {
+      padding: 12px 25px;
+      margin: 10px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    /* ✅ OK Button */
+    .ok {
+      background: linear-gradient(45deg, #ff4d6d, #ff1f4d);
+      color: white;
+      box-shadow: 0 0 15px #ff4d6d;
+    }
+
+    .ok:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px #ff4d6d;
+    }
+
+    /* ❌ Cancel Button */
+    .cancel {
+      background: #222;
+      color: #ccc;
+    }
+
+    .cancel:hover {
+      background: #444;
+      transform: scale(1.1);
+    }
+  </style>
+
 </head>
 
 <body>
 
-<!-- 💔 REPEATED TEXT -->
-<div class="background-text">
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔<br>
-  u r my incomplete luv 💔
-</div>
+  <div class="box">
+    <h2>Enter Password ❤️</h2>
 
-<!-- 🔐 PASSWORD BOX -->
-<div class="box">
-  <h2>Enter Password ❤️</h2>
-  <input type="password" id="password">
-  <br>
-  <button onclick="checkPassword()">OK</button>
-  <button onclick="goBack()">Cancel</button>
-</div>
+    <input type="password" id="password" placeholder="Enter password">
 
-<script>
-function checkPassword(){
-  if(document.getElementById("password").value === "khusheadii"){
-    window.location.href="birthday.html";
-  } else {
-    alert("Wrong Password ❌");
-  }
-}
+    <div class="buttons">
+      <button class="ok" onclick="checkPassword()">OK</button>
+      <button class="cancel" onclick="goBack()">Cancel</button>
+    </div>
+  </div>
 
-function goBack(){
-  window.history.back();
-}
-</script>
+  <script>
+    function checkPassword() {
+      const correctPassword = "khusheadii";
+      const input = document.getElementById("password").value;
+
+      if (input === correctPassword) {
+        window.location.href = "birthday.html";
+      } else {
+        alert("Wrong Password ❌");
+      }
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+  </script>
 
 </body>
 </html>
