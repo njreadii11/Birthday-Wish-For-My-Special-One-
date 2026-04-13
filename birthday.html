@@ -2,28 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>HAPPY BIRTHDAY MY LUV 🎉</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Happy Birthday ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff4d6d, #000);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 60px;
+      color: #ff4d6d;
+      animation: glow 2s infinite alternate;
+    }
+
+    p {
+      max-width: 600px;
+      font-size: 20px;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff4d6d; }
+      to { text-shadow: 0 0 30px #ff1f4d; }
+    }
+  </style>
+
 </head>
 
 <body>
 
-  <div class="overlay">
-    <h1>🎉 HAPPY BIRTHDAY 🎂</h1>
+  <div>
+    <h1>🎉 HAPPY BIRTHDAY ❤️</h1>
 
     <p>
       Happy Birthday to the most special person in my life... 💖  
-      Shayad hum ab pehle jaise saath nahi hain, lekin dil ke kisi kone mein  
-      tum hamesha rahogi.  
+      Shayad hum ab saath nahi hain, lekin tumhari khushi aaj bhi mere liye important hai.  
+      Tumhari smile hamesha meri favorite thi... aur rahegi.  
 
-      Aaj ke din bas itna kehna chahta hoon ki tum hamesha khush raho,  
-      tumhari life mein sirf happiness ho, aur tum jo bhi chaho wo tumhe mile.  
+      Aaj ke din bas dua karta hoon ki tum hamesha khush raho,  
+      tumhari life me sirf happiness ho ✨  
 
-      Tum meri life ka ek beautiful part thi... aur hamesha rahogi.  
-      Once again, Happy Birthday 💕✨
+      Once again… Happy Birthday ❤️
     </p>
-
   </div>
+
+  <!-- 🎶 Romantic Music -->
+  <audio id="music" autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
 
 </body>
 </html>
