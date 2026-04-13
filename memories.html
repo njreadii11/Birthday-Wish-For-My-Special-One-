@@ -4,34 +4,28 @@
 <meta charset="UTF-8">
 <title>Memories 💖</title>
 
-<!-- 🔥 Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300&display=swap" rel="stylesheet">
+<!-- 🔥 Clean Premium Font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Raleway:wght@300&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
   overflow: hidden;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: white;
 }
 
-/* 🎬 VIDEO FULL SCREEN FIX */
+/* 🎬 VIDEO FULL FIX */
 video {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   z-index: -1;
 
-  filter: blur(4px);
-  animation: zoom 20s infinite alternate ease-in-out;
-}
-
-@keyframes zoom {
-  from { transform: scale(1); }
-  to { transform: scale(1.15); }
+  filter: brightness(60%) blur(2px);
 }
 
 /* 💖 OVERLAY */
@@ -39,34 +33,29 @@ video {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.65);
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-/* 💌 TEXT BOX */
+/* 💌 TEXT */
 .text {
-  max-width: 900px;
+  max-width: 800px;
   padding: 20px;
 }
 
-/* ✨ LINE STYLE (ATTRACTIVE) */
+/* ✨ CLEAN LINE STYLE */
 .line {
   opacity: 0;
   transform: translateY(20px);
-  margin: 12px 0;
-  font-size: 26px;
+  margin: 14px 0;
 
-  /* 💖 Stylish font */
-  font-family: 'Great Vibes', cursive;
+  font-size: 24px;
+  font-family: 'Playfair Display', serif;
 
-  /* 🔥 Glow effect */
-  color: #fff;
-  text-shadow: 0 0 10px #ff4d6d,
-               0 0 20px #ff4d6d,
-               0 0 30px #ff1f4d;
+  color: #f5f5f5;
+  letter-spacing: 1px;
 
   animation: fade 1.2s ease forwards;
 }
@@ -80,13 +69,12 @@ video {
 
 /* 💔 FINAL TYPING */
 .typing {
-  font-size: 32px;
+  font-size: 28px;
   margin-top: 30px;
-  font-family: 'Great Vibes', cursive;
-  color: #ff4d6d;
-  text-shadow: 0 0 10px #ff4d6d;
+  font-family: 'Playfair Display', serif;
+  color: #ffffff;
 
-  border-right: 3px solid white;
+  border-right: 2px solid white;
   white-space: nowrap;
   overflow: hidden;
   width: 0;
@@ -97,7 +85,7 @@ video {
 <body>
 
 <!-- 🎬 VIDEO -->
-<video id="video" loop playsinline>
+<video id="video" autoplay loop playsinline preload="auto">
   <source src="video.mp4" type="video/mp4">
 </video>
 
@@ -106,16 +94,22 @@ video {
 </div>
 
 <script>
-// 🔊 SOUND + PLAY FIX (CLICK REQUIRED)
+// 🔊 SOUND + PLAY FIX
 document.body.addEventListener("click", function(){
   let v = document.getElementById("video");
   v.muted = false;
   v.play();
 });
 
+// 💡 IMPORTANT: force play on load
+window.onload = function(){
+  let v = document.getElementById("video");
+  v.play().catch(()=>{});
+};
+
 // 💌 TEXT LINES
 const lines = [
-"Some memories are not meant to fade away…💖",
+"Some memories are not meant to fade away… 💖",
 "They stay quietly in the heart, no matter how far we go.",
 "We may not talk anymore, we may not be together…",
 "but those moments we shared were real, and they meant everything.",
@@ -126,7 +120,7 @@ const lines = [
 "And even today, when I think about those days…",
 "I don’t feel pain… I feel something beautiful.",
 "Because not all love stories are meant to stay forever…",
-"some are just meant to be remembered.💔"
+"some are just meant to be remembered. 💔"
 ];
 
 let i = 0;
