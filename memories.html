@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Memories 💖</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial;
+  color: white;
+}
+
+/* 🎬 Background Video */
+video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 💖 Dark overlay */
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* ✨ Text Style */
+.text {
+  max-width: 800px;
+  font-size: 24px;
+  line-height: 1.8;
+}
+
+/* 💌 Lines hidden initially */
+.line {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- 🎬 VIDEO -->
+<video autoplay muted loop>
+  <source src="video.mp4" type="video/mp4">
+</video>
+
+<div class="overlay">
+  <div class="text" id="text"></div>
+</div>
+
+<script>
+const lines = [
+  "Some memories are not meant to fade away… 💖",
+  "They stay quietly in the heart, no matter how far we go.",
+  "We may not talk anymore, we may not be together…",
+  "but those moments we shared were real, and they meant everything.",
+  "Every smile, every laugh, every little fight…",
+  "they are still alive somewhere inside me.",
+  "I don’t regret loving you… not even for a second.",
+  "Because for a moment, you were my whole world.",
+  "And even today, when I think about those days…",
+  "I don’t feel pain… I feel something beautiful.",
+  "Because not all love stories are meant to stay forever…",
+  "some are just meant to be remembered. 💔"
+];
+
+let i = 0;
+
+function showLine() {
+  if (i < lines.length) {
+    let div = document.createElement("div");
+    div.className = "line";
+    div.style.animationDelay = "0s";
+    div.innerText = lines[i];
+    document.getElementById("text").appendChild(div);
+    i++;
+    setTimeout(showLine, 2500); // ⏱ delay between lines
+  }
+}
+
+showLine();
+</script>
+
+</body>
+</html>
