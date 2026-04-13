@@ -2,36 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Private Page 🔐</title>
+  <title>Private 🔐</title>
 
   <style>
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #ff4d6d, #1a1a1a);
+      font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
+
+      /* ❤️ Romantic Background */
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
+                  url("https://i.imgur.com/8Km9tLL.jpg") no-repeat center/cover;
       color: white;
     }
 
     .box {
-      text-align: center;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.7);
       padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      text-align: center;
+      box-shadow: 0 0 25px rgba(255,0,80,0.6);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 12px;
+      width: 250px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .buttons {
+      margin-top: 20px;
     }
 
     button {
-      padding: 12px 25px;
+      padding: 10px 20px;
+      margin: 10px;
       border: none;
       border-radius: 10px;
       background: #ff4d6d;
       color: white;
-      font-size: 16px;
       cursor: pointer;
+      font-size: 16px;
     }
 
     button:hover {
@@ -44,27 +66,30 @@
 <body>
 
   <div class="box">
-    <h2>🔐 Private Birthday Page</h2>
-    <p>Click below to enter</p>
-    <button onclick="askPassword()">Enter</button>
+    <h2>🔐 Enter Password</h2>
+
+    <input type="password" id="password" placeholder="Enter password">
+
+    <div class="buttons">
+      <button onclick="checkPassword()">OK</button>
+      <button onclick="goBack()">Cancel</button>
+    </div>
   </div>
 
   <script>
-    function askPassword() {
+    function checkPassword() {
       const correctPassword = "khusheadii"; // ✅ PASSWORD SET
+      const input = document.getElementById("password").value;
 
-      let userInput = prompt("Enter Password 🔐");
-
-      if (userInput === null) {
-        // Cancel button click
-        window.history.back();
-      } 
-      else if (userInput === correctPassword) {
+      if (input === correctPassword) {
         window.location.href = "birthday.html";
-      } 
-      else {
+      } else {
         alert("Wrong Password ❌");
       }
+    }
+
+    function goBack() {
+      window.history.back(); // 🔙 back
     }
   </script>
 
