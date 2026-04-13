@@ -13,7 +13,7 @@ body {
   text-align: center;
   overflow: hidden;
 
-  /* 📸 FULL BACKGROUND IMAGE */
+  /* ✅ FULL BACKGROUND IMAGE */
   background: url("photo.jpg.jpg") no-repeat center center/cover;
 }
 
@@ -28,7 +28,7 @@ body::before {
   left: 0;
 }
 
-/* 💎 Content center */
+/* 💎 Center content */
 .container {
   position: relative;
   z-index: 2;
@@ -37,9 +37,9 @@ body::before {
   padding: 20px;
 }
 
-/* ❤️ Heartbeat */
+/* ❤️ Heartbeat animation */
 h1 {
-  font-size: 60px;
+  font-size: 55px;
   animation: beat 1s infinite;
 }
 @keyframes beat {
@@ -53,12 +53,29 @@ h1 {
   color: #ff4d6d;
 }
 
-/* 💌 Full Message */
+/* 💌 Message */
 .message {
   max-width: 700px;
   margin: 20px auto;
   font-size: 18px;
   line-height: 1.7;
+}
+
+/* 🔥 Button */
+.next-btn {
+  padding: 12px 25px;
+  background: linear-gradient(45deg,#ff4d6d,#ff1f4d);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  margin-top: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 0 15px #ff4d6d;
+}
+
+.next-btn:hover {
+  transform: scale(1.1);
 }
 
 /* 🎈 Balloons */
@@ -101,7 +118,7 @@ h1 {
 <body>
 
 <div class="container">
-  <h1>🎉 HAPPY BIRTHDAY MY LOVE❤️</h1>
+  <h1>🎉 HAPPY BIRTHDAY MY LOVE ❤️</h1>
 
   <div class="name">KHUSHIII 💖</div>
 
@@ -121,17 +138,26 @@ h1 {
     You were never just a chapter in my life…  
     you were a feeling I will always remember.  
 
-    Happy Birthday… 💖
+    Happy Birthday… 💖  
     Allah always keeps you happy
   </div>
+
+  <!-- 💖 NEXT PAGE BUTTON -->
+  <button onclick="nextPage()" class="next-btn">
+    See Memories 💖
+  </button>
 </div>
 
-<!-- 🎶 Music -->
+<!-- 🎶 MUSIC -->
 <audio autoplay loop>
   <source src="zaalima.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+function nextPage(){
+  window.location.href = "memories.html";
+}
+
 // 🎈 Balloons
 for(let i=0;i<15;i++){
  let b=document.createElement("div");
@@ -155,21 +181,3 @@ for(let i=0;i<80;i++){
 
 </body>
 </html>
-
-<button onclick="nextPage()" style="
-padding:10px 20px;
-background:#ff4d6d;
-border:none;
-border-radius:10px;
-color:white;
-margin-top:20px;
-cursor:pointer;
-">
-See Memories 💖
-</button>
-
-<script>
-function nextPage(){
-  window.location.href = "memories.html";
-}
-</script>
