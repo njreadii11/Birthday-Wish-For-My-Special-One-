@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Memories 💖</title>
 
-<!-- 🔥 Clean Premium Font -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Raleway:wght@300&display=swap" rel="stylesheet">
 
 <style>
@@ -15,7 +14,7 @@ body {
   color: white;
 }
 
-/* 🎬 VIDEO FULL FIX */
+/* 🎬 VIDEO */
 video {
   position: fixed;
   top: 0;
@@ -24,7 +23,6 @@ video {
   height: 100%;
   object-fit: cover;
   z-index: -1;
-
   filter: brightness(60%) blur(2px);
 }
 
@@ -39,28 +37,31 @@ video {
   text-align: center;
 }
 
-/* 💌 TEXT */
 .text {
   max-width: 800px;
   padding: 20px;
 }
 
-/* ✨ CLEAN LINE STYLE */
+/* ✨ LINE STYLE */
 .line {
-  opacity: 0;
-  transform: translateY(20px);
-  margin: 14px 0;
-
   font-size: 24px;
   font-family: 'Playfair Display', serif;
-
   color: #f5f5f5;
   letter-spacing: 1px;
-
-  animation: fade 1.2s ease forwards;
+  margin: 14px 0;
+  line-height: 1.6;
 }
 
-@keyframes fade {
+/* word animation */
+.word {
+  opacity: 0;
+  display: inline-block;
+  transform: translateY(10px);
+  animation: fadeWord 0.6s forwards;
+  margin-right: 5px;
+}
+
+@keyframes fadeWord {
   to {
     opacity: 1;
     transform: translateY(0);
@@ -73,18 +74,15 @@ video {
   margin-top: 30px;
   font-family: 'Playfair Display', serif;
   color: #ffffff;
-
   border-right: 2px solid white;
   white-space: nowrap;
   overflow: hidden;
-  width: 0;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎬 VIDEO -->
 <video id="video" autoplay loop playsinline preload="auto">
   <source src="video.mp4" type="video/mp4">
 </video>
@@ -94,20 +92,19 @@ video {
 </div>
 
 <script>
-// 🔊 SOUND + PLAY FIX
+
+// 🔊 autoplay fix
 document.body.addEventListener("click", function(){
   let v = document.getElementById("video");
   v.muted = false;
   v.play();
 });
 
-// 💡 IMPORTANT: force play on load
 window.onload = function(){
-  let v = document.getElementById("video");
-  v.play().catch(()=>{});
+  document.getElementById("video").play().catch(()=>{});
 };
 
-// 💌 TEXT LINES
+// 💌 TEXT
 const lines = [
 "Some memories are not meant to fade away… 💖",
 "They stay quietly in the heart, no matter how far we go.",
@@ -127,12 +124,28 @@ let i = 0;
 
 function showLine(){
   if(i < lines.length){
-    let div = document.createElement("div");
-    div.className = "line";
-    div.innerText = lines[i];
-    document.getElementById("text").appendChild(div);
-    i++;
-    setTimeout(showLine, 2500);
+    let lineDiv = document.createElement("div");
+    lineDiv.className = "line";
+    document.getElementById("text").appendChild(lineDiv);
+
+    let words = lines[i].split(" ");
+    let w = 0;
+
+    function showWord(){
+      if(w < words.length){
+        let span = document.createElement("span");
+        span.className = "word";
+        span.innerText = words[w] + " ";
+        lineDiv.appendChild(span);
+        w++;
+        setTimeout(showWord, 180); // speed control
+      } else {
+        i++;
+        setTimeout(showLine, 800);
+      }
+    }
+
+    showWord();
   } else {
     showFinalTyping();
   }
@@ -158,6 +171,7 @@ function showFinalTyping(){
   }
   type();
 }
+
 </script>
 
 </body>
