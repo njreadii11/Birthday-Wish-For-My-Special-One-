@@ -7,23 +7,31 @@
 <style>
 body {
   margin: 0;
-  height: 100vh;
   overflow: hidden;
   font-family: Arial;
   color: white;
 }
 
-/* 🎬 Background Video */
+/* 🎬 VIDEO (BLUR + ZOOM) */
 video {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   object-fit: cover;
+  z-index: -1;
+
+  filter: blur(3px);
+  animation: zoom 20s infinite alternate ease-in-out;
 }
 
-/* 💖 Dark overlay */
+@keyframes zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+/* 💖 OVERLAY */
 .overlay {
   position: absolute;
   width: 100%;
@@ -35,44 +43,62 @@ video {
   text-align: center;
 }
 
-/* ✨ Text Style */
+/* 💌 TEXT */
 .text {
   max-width: 800px;
   font-size: 24px;
   line-height: 1.8;
 }
 
-/* 💌 Lines hidden initially */
+/* ✨ LINE ANIMATION */
 .line {
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeIn 1s forwards;
+  margin: 10px 0;
+  animation: fade 1s forwards;
 }
 
-@keyframes fadeIn {
+@keyframes fade {
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-</style>
 
+/* 💔 FINAL TYPING */
+.typing {
+  font-size: 28px;
+  margin-top: 30px;
+  border-right: 3px solid white;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 </head>
 
 <body>
 
 <!-- 🎬 VIDEO -->
-<video id="video" autoplay loop controls>
+<video id="video" autoplay loop>
   <source src="video.mp4" type="video/mp4">
 </video>
 
+<div class="overlay">
+  <div class="text" id="text"></div>
+</div>
+
 <script>
-window.onload = function(){
+// 🔊 SOUND FIX
+document.body.addEventListener("click", function(){
   let v = document.getElementById("video");
   v.muted = false;
   v.play();
-}
-</script>
+});
+
+// 💌 LINES
 const lines = [
   "Some memories are not meant to fade away… 💖",
   "They stay quietly in the heart, no matter how far we go.",
@@ -90,19 +116,40 @@ const lines = [
 
 let i = 0;
 
-function showLine() {
-  if (i < lines.length) {
+function showLine(){
+  if(i < lines.length){
     let div = document.createElement("div");
     div.className = "line";
-    div.style.animationDelay = "0s";
     div.innerText = lines[i];
     document.getElementById("text").appendChild(div);
     i++;
-    setTimeout(showLine, 2500); // ⏱ delay between lines
+    setTimeout(showLine, 2500);
+  } else {
+    showFinalTyping(); // 👇 last message
   }
 }
 
 showLine();
+
+// 💔 FINAL TYPING EFFECT
+function showFinalTyping(){
+  let div = document.createElement("div");
+  div.className = "typing";
+  document.getElementById("text").appendChild(div);
+
+  let text = "I still miss you my luv…💔";
+  let j = 0;
+
+  function type(){
+    if(j < text.length){
+      div.innerHTML += text.charAt(j);
+      j++;
+      setTimeout(type, 100);
+    }
+  }
+
+  type();
+}
 </script>
 
 </body>
