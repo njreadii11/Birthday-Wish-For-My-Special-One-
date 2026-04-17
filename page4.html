@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Last Page 💔</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Raleway:wght@300&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at center, #111, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+}
+
+/* 💌 BOX */
+.container {
+  max-width: 800px;
+  padding: 30px;
+}
+
+/* ✨ TEXT */
+#message {
+  font-size: 26px;
+  font-family: 'Playfair Display', serif;
+  line-height: 1.6;
+  border-right: 2px solid white;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* 💖 BUTTON */
+.btn {
+  margin-top: 40px;
+  padding: 12px 25px;
+  border: none;
+  background: #ff4d6d;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 30px;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.btn:hover {
+  background: #ff1e4d;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div id="message"></div>
+  <button class="btn" id="btn" onclick="restart()">Start Again 💖</button>
+</div>
+
+<script>
+
+// 💌 FINAL MESSAGE
+const text = "Maybe we were not meant to stay forever… but we were meant to happen. 💔";
+
+// typing effect
+let i = 0;
+const speed = 80;
+
+function type(){
+  if(i < text.length){
+    document.getElementById("message").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, speed);
+  } else {
+    document.getElementById("btn").style.opacity = "1";
+  }
+}
+
+type();
+
+// 🔁 RESTART BUTTON
+function restart(){
+  window.location.href = "index.html"; // change if needed
+}
+
+</script>
+
+</body>
+</html>
