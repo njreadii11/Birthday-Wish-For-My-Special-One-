@@ -1,17 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Memories 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Raleway:wght@300&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Raleway', sans-serif;
+  color: white;
+}
+
+video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(60%) blur(2px);
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.text {
+  max-width: 800px;
+  padding: 20px;
+}
+
+.line {
+  font-size: 24px;
+  font-family: 'Playfair Display', serif;
+  margin: 14px 0;
+}
+
+.word {
+  opacity: 0;
+  display: inline-block;
+  animation: fadeWord 0.5s forwards;
+}
+
+@keyframes fadeWord {
+  to { opacity: 1; }
+}
+
+.typing {
+  font-size: 28px;
+  margin-top: 30px;
+  border-right: 2px solid white;
+  white-space: nowrap;
+  overflow: hidden;
+}
+</style>
+</head>
+
+<body>
+
+<video autoplay loop muted playsinline>
+  <source src="video.mp4" type="video/mp4">
+</video>
+
+<div class="overlay">
+  <div class="text" id="text"></div>
+</div>
+
 <script>
 
-// 🔊 autoplay fix
-document.body.addEventListener("click", function(){
-  let v = document.getElementById("video");
-  v.muted = false;
-  v.play();
-});
-
-window.onload = function(){
-  document.getElementById("video").play().catch(()=>{});
-};
-
-// 💌 TEXT
 const lines = [
 "Some memories are not meant to fade away… 💖",
 "They stay quietly in the heart, no matter how far we go.",
@@ -45,10 +111,10 @@ function showLine(){
         span.innerText = words[w] + " ";
         lineDiv.appendChild(span);
         w++;
-        setTimeout(showWord, 180);
+        setTimeout(showWord, 150);
       } else {
         i++;
-        setTimeout(showLine, 800);
+        setTimeout(showLine, 600);
       }
     }
 
@@ -58,56 +124,48 @@ function showLine(){
   }
 }
 
-showLine();
-
-// 💔 FINAL TYPING + NEXT BUTTON
 function showFinalTyping(){
-  let container = document.getElementById("text");
-
   let div = document.createElement("div");
   div.className = "typing";
-  container.appendChild(div);
+  document.getElementById("text").appendChild(div);
 
   let text = "I still miss you…";
   let j = 0;
 
   function type(){
     if(j < text.length){
-      div.innerHTML += text.charAt(j);
+      div.innerHTML += text[j];
       j++;
-      setTimeout(type, 120);
+      setTimeout(type, 100);
     } else {
-      showNextButton(); // 👈 typing ke baad button
+      showNextButton();
     }
   }
   type();
 }
 
-// 👉 NEXT BUTTON
 function showNextButton(){
   let btn = document.createElement("button");
   btn.innerText = "Next ➝";
-  
+
   btn.style.marginTop = "40px";
-  btn.style.padding = "12px 28px";
-  btn.style.fontSize = "16px";
-  btn.style.border = "none";
+  btn.style.padding = "12px 25px";
   btn.style.borderRadius = "30px";
+  btn.style.border = "none";
   btn.style.background = "#ff4d6d";
   btn.style.color = "white";
   btn.style.cursor = "pointer";
-  btn.style.opacity = "0";
-  btn.style.transition = "0.5s";
 
   btn.onclick = function(){
-    window.location.href = "page4.html"; // 👈 4th page
+    window.location.href = "page4.html";
   };
 
   document.getElementById("text").appendChild(btn);
-
-  setTimeout(() => {
-    btn.style.opacity = "1";
-  }, 200);
 }
 
+showLine();
+
 </script>
+
+</body>
+</html>
