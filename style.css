@@ -52,3 +52,19 @@ video {
   letter-spacing: 1px;
   color: #f5f5f5;
 }
+.next-btn {
+  margin-top: 40px;
+  padding: 12px 28px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.next-btn:hover {
+  background: #ff1e4d;
+}
