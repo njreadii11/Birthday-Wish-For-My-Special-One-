@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title> UR DAY❤️</title>
+<title>Private ❤️</title>
 
 <style>
 body {
@@ -11,12 +11,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
   background: black;
+  font-family: Arial;
+  overflow: hidden;
 }
 
-/* ❤️ Animated Hearts Background */
+/* ❤️ BG */
 body::before {
   content: "";
   position: absolute;
@@ -32,107 +32,70 @@ body::before {
   to { background-position: 0 1000px; }
 }
 
-/* 💎 Glass Box */
+/* BOX */
 .box {
   position: relative;
-  z-index: 1;
-  background: rgba(255, 0, 80, 0.15);
-  backdrop-filter: blur(15px);
+  z-index: 2;
+  background: rgba(0,0,0,0.6);
   padding: 40px;
-  border-radius: 25px;
+  border-radius: 20px;
   text-align: center;
-  box-shadow: 0 0 40px rgba(255,0,80,0.7);
 }
 
 h2 {
-  margin-bottom: 20px;
-  color: #ff4d6d;
-  font-size: 28px;
+  color: #00ff88;
 }
 
+/* INPUT */
 input {
-  padding: 12px;
-  width: 250px;
-  border-radius: 12px;
+  padding: 10px;
+  border-radius: 10px;
   border: none;
-  outline: none;
-  font-size: 16px;
-  text-align: center;
 }
 
-/* 📦 BUTTON CONTAINER */
+/* BUTTONS */
 .buttons {
   display: flex;
   justify-content: space-between;
-  width: 250px;
-  margin-top: 25px;
+  width: 220px;
+  margin-top: 15px;
 }
 
-/* 🔘 COMMON BUTTON */
-.buttons button {
+button {
   width: 45%;
-  padding: 12px;
+  padding: 10px;
+  border-radius: 10px;
   border: none;
-  border-radius: 12px;
-  font-size: 16px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-/* ❌ Cancel LEFT */
-.cancel {
-  background: #222;
-  color: #ccc;
-}
-
-.cancel:hover {
-  background: #444;
-  transform: scale(1.1);
-}
-
-/* ✅ OK RIGHT */
-.ok {
-  background: linear-gradient(45deg, #ff4d6d, #ff1f4d);
-  color: white;
-  box-shadow: 0 0 15px #ff4d6d;
-}
-
-.ok:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 25px #ff4d6d;
-}
+.cancel { background:#222; color:#ccc; }
+.ok { background:#00ff88; }
 </style>
-
 </head>
 
 <body>
 
 <div class="box">
-  <h2>Enter Password❤️</h2>
+<h2>Enter Password 💚</h2>
 
-  <input type="password" id="password" placeholder="Enter password">
+<input type="password" id="password"><br>
 
-  <!-- 🔘 BUTTONS -->
-  <div class="buttons">
-    <button class="cancel" onclick="goBack()">Cancel</button>
-    <button class="ok" onclick="checkPassword()">OK</button>
-  </div>
+<div class="buttons">
+<button class="cancel" onclick="history.back()">Cancel</button>
+<button class="ok" onclick="checkPassword()">OK</button>
+</div>
 </div>
 
 <script>
-function checkPassword() {
-  const correctPassword = "khusheadii";
-  const input = document.getElementById("password").value;
+function checkPassword(){
+  let input = document.getElementById("password").value;
 
-  if (input === correctPassword) {
+  if(input === "khusheadii"){
     window.location.href = "birthday.html";
   } else {
     alert("Wrong Password ❌");
   }
-}
-
-function goBack() {
-  window.history.back();
 }
 </script>
 
