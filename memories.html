@@ -2,197 +2,98 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Memories 💖</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Raleway:wght@300&display=swap" rel="stylesheet">
+<title>Final 💔</title>
 
 <style>
 body {
   margin: 0;
-  overflow: hidden;
-  font-family: 'Raleway', sans-serif;
-  color: white;
-}
-
-/* 🎬 VIDEO */
-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-  filter: brightness(60%) blur(2px);
-}
-
-/* 💖 OVERLAY */
-.overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  height: 100vh;
+  background: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-}
-
-.text {
-  max-width: 800px;
-  padding: 20px;
-}
-
-/* ✨ LINE STYLE */
-.line {
-  font-size: 24px;
   font-family: 'Playfair Display', serif;
-  color: #f5f5f5;
-  margin: 14px 0;
-  line-height: 1.6;
-}
-
-/* word animation */
-.word {
-  opacity: 0;
-  display: inline-block;
-  transform: translateY(10px);
-  animation: fadeWord 0.6s forwards;
-  margin-right: 5px;
-}
-
-@keyframes fadeWord {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 💔 FINAL TYPING */
-.typing {
-  font-size: 28px;
-  margin-top: 30px;
-  font-family: 'Playfair Display', serif;
-  border-right: 2px solid white;
-  white-space: nowrap;
   overflow: hidden;
+  color: white;
+}
+
+/* 💔 TEXT */
+#text {
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+/* ✨ FADE ANIMATION */
+.fade {
+  opacity: 0;
+  animation: fadeIn 3s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* 💓 HEARTBEAT */
+.heart {
+  color: #ff4d6d;
+  animation: beat 1s infinite;
+}
+
+@keyframes beat {
+  50% { transform: scale(1.2); }
 }
 </style>
 </head>
 
 <body>
 
-<video id="video" autoplay loop playsinline muted>
-  <source src="video.mp4" type="video/mp4">
-</video>
-
-<div class="overlay">
-  <div class="text" id="text"></div>
-</div>
+<div id="text"></div>
 
 <script>
 
-// 🔊 click to unmute
-document.body.addEventListener("click", function(){
-  let v = document.getElementById("video");
-  v.muted = false;
-  v.play();
-});
-
-// 💌 TEXT
-const lines = [
-"Some memories are not meant to fade away… 💖",
-"They stay quietly in the heart, no matter how far we go.",
-"We may not talk anymore, we may not be together…",
-"but those moments we shared were real, and they meant everything.",
-"Every smile, every laugh, every little fight…",
-"they are still alive somewhere inside me.",
-"I don’t regret loving you… not even for a second.",
-"Because for a moment, you were my whole world.",
-"And even today, when I think about those days…",
-"I don’t feel pain… I feel something beautiful.",
-"Because not all love stories are meant to stay forever…",
-"some are just meant to be remembered. 💔"
+const messages = [
+  "Maybe we were not meant to stay forever…",
+  "But you were the most beautiful part of my life…",
+  "And you always will be…",
+  "💔"
 ];
 
 let i = 0;
 
-function showLine(){
-  if(i < lines.length){
+function showText(){
+  if(i < messages.length){
+    let div = document.createElement("div");
+    div.className = "fade";
 
-    let lineDiv = document.createElement("div");
-    lineDiv.className = "line";
-    document.getElementById("text").appendChild(lineDiv);
-
-    let words = lines[i].split(" ");
-    let w = 0;
-
-    function showWord(){
-      if(w < words.length){
-        let span = document.createElement("span");
-        span.className = "word";
-        span.innerText = words[w] + " ";
-        lineDiv.appendChild(span);
-        w++;
-        setTimeout(showWord, 150);
-      } else {
-        i++;
-        setTimeout(showLine, 700);
-      }
-    }
-
-    showWord();
-
-  } else {
-    showFinalTyping();
-  }
-}
-
-showLine();
-
-// 💔 FINAL TYPING + NEXT BUTTON
-function showFinalTyping(){
-
-  let container = document.getElementById("text");
-
-  let div = document.createElement("div");
-  div.className = "typing";
-  container.appendChild(div);
-
-  let text = "I still miss you…";
-  let j = 0;
-
-  function type(){
-    if(j < text.length){
-      div.innerHTML += text[j];
-      j++;
-      setTimeout(type, 100);
+    if(messages[i] === "💔"){
+      div.innerHTML = '<span class="heart">💔</span>';
     } else {
-      showNextButton();
+      div.innerText = messages[i];
     }
-  }
 
-  type();
+    document.getElementById("text").appendChild(div);
+    i++;
+    setTimeout(showText, 3000);
+  } else {
+    finalMessage();
+  }
 }
 
-// 👉 NEXT BUTTON
-function showNextButton(){
+showText();
 
-  let btn = document.createElement("button");
-  btn.innerText = "Next ➝";
-
-  btn.style.marginTop = "40px";
-  btn.style.padding = "12px 25px";
-  btn.style.border = "none";
-  btn.style.borderRadius = "30px";
-  btn.style.background = "#ff4d6d";
-  btn.style.color = "white";
-  btn.style.cursor = "pointer";
-
-  btn.onclick = function(){
-    window.location.href = "page4.html";
-  };
-
-  document.getElementById("text").appendChild(btn);
+function finalMessage(){
+  setTimeout(()=>{
+    document.body.innerHTML = `
+      <div style="
+        font-size:50px;
+        text-align:center;
+        animation: fadeIn 3s forwards;
+      ">
+        THE END 💔
+      </div>
+    `;
+  },2000);
 }
 
 </script>
