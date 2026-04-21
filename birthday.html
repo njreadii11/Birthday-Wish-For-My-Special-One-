@@ -13,7 +13,6 @@ body {
   text-align: center;
   overflow: hidden;
 
-  /* ✅ FIXED IMAGE NAME */
   background: url("photo.jpg.jpg") no-repeat center center/cover;
 }
 
@@ -146,8 +145,8 @@ h1 {
   </button>
 </div>
 
-<!-- 🎶 MUSIC FIX -->
-<audio id="music" loop>
+<!-- 🎶 MUSIC (IMPORTANT FIX) -->
+<audio id="music" autoplay loop>
   <source src="zaalima.mp3" type="audio/mpeg">
 </audio>
 
@@ -156,11 +155,18 @@ function nextPage(){
   window.location.href = "memories.html";
 }
 
-/* 🔊 PLAY MUSIC ON FIRST CLICK */
-document.body.addEventListener("click", function(){
+/* 🔊 STRONG AUTOPLAY FIX (Desktop + Mobile) */
+window.addEventListener("load", function() {
   let music = document.getElementById("music");
-  music.play().catch(()=>{});
-}, { once: true });
+
+  // try autoplay
+  music.play().catch(() => {
+    // if blocked → play on first click
+    document.body.addEventListener("click", function () {
+      music.play();
+    }, { once: true });
+  });
+});
 
 /* 🎈 Balloons */
 for(let i=0;i<15;i++){
