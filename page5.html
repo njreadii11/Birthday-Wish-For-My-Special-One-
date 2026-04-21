@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Memories 💔</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: black;
+  font-family: 'Playfair Display', serif;
+  color: white;
+}
+
+/* 📸 SLIDER */
+.slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* 💔 TEXT */
+.text {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+  text-align: center;
+  font-size: 28px;
+  text-shadow: 0 0 10px black;
+  padding: 0 20px;
+}
+
+/* 🎬 FINAL FADE */
+.fade-out {
+  animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 📸 SLIDES -->
+<div class="slider">
+  <div class="slide active" style="background-image:url('photo1.jpg')"></div>
+  <div class="slide" style="background-image:url('photo2.jpg')"></div>
+  <div class="slide" style="background-image:url('photo3.jpg')"></div>
+  <div class="slide" style="background-image:url('photo4.jpg')"></div>
+  <div class="slide" style="background-image:url('photo5.jpg')"></div>
+</div>
+
+<!-- 💔 TEXT -->
+<div class="text" id="text">Some memories stay forever… 💔</div>
+
+<!-- 🎶 OPTIONAL MUSIC -->
+<audio id="music" autoplay loop>
+  <source src="sad.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let slides = document.querySelectorAll(".slide");
+let text = document.getElementById("text");
+
+let index = 0;
+
+/* 💬 Quotes */
+const quotes = [
+  "Some memories stay forever… 💔",
+  "Every moment with you meant everything…",
+  "We may be apart… but those days were real…",
+  "You were my happiness once…",
+  "And maybe… you always will be…",
+  "I still miss you… 💔"
+];
+
+function nextSlide(){
+  slides[index].classList.remove("active");
+
+  index++;
+
+  if(index < slides.length){
+    slides[index].classList.add("active");
+    text.innerText = quotes[index];
+  } else {
+    endScene();
+  }
+}
+
+/* 🎬 END SCENE */
+function endScene(){
+  document.body.classList.add("fade-out");
+
+  setTimeout(()=>{
+    document.body.innerHTML = `
+      <div style="
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:black;
+        color:white;
+        font-size:50px;
+        text-align:center;
+      ">
+        THE END 💔
+      </div>
+    `;
+  },3000);
+}
+
+/* ⏱ AUTO SLIDE */
+setInterval(nextSlide, 3500);
+</script>
+
+</body>
+</html>
