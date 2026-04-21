@@ -9,7 +9,11 @@
 <style>
 body {
   margin: 0;
-  overflow: hidden;
+
+  /* ❗ FIX: scroll allow */
+  overflow-y: auto;
+  overflow-x: hidden;
+
   font-family: 'Raleway', sans-serif;
   color: white;
 }
@@ -29,9 +33,10 @@ video {
 
 /* 💖 OVERLAY */
 .overlay {
-  position: absolute;
+  position: relative;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,6 +47,10 @@ video {
 .text {
   max-width: 850px;
   padding: 20px;
+
+  /* ❗ FIX: overflow */
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 /* ✨ LINE STYLE */
@@ -69,14 +78,15 @@ video {
   }
 }
 
-/* 💔 FINAL TYPING */
+/* 💔 FINAL TYPING FIX */
 .typing {
   font-size: 30px;
   margin-top: 30px;
   font-family: 'Playfair Display', serif;
   border-right: 2px solid white;
-  white-space: nowrap;
-  overflow: hidden;
+
+  /* ❗ IMPORTANT FIX */
+  white-space: normal;
 }
 
 /* 🔘 NEXT BUTTON */
@@ -102,7 +112,7 @@ video {
 <body>
 
 <!-- 🎬 VIDEO -->
-<video id="video" autoplay loop playsinline muted>
+<video id="video" autoplay loop playsinline>
   <source src="video.mp4" type="video/mp4">
 </video>
 
@@ -113,16 +123,16 @@ video {
 
 <script>
 
-// 🔊 click to unmute (mobile fix)
+// 🔊 VIDEO SOUND FIX (click required)
 document.body.addEventListener("click", function(){
   let v = document.getElementById("video");
   v.muted = false;
-  v.play();
-});
+  v.play().catch(()=>{});
+}, { once: true });
 
 // 💌 LINES
 const lines = [
-"Some memories re not meant to fade away…💖",
+"Some memories are not meant to fade away… 💖",
 "They stay quietly in the heart no matter how far we go.",
 "We may not talk anymore we may not be together…",
 "but those moments we shared were real and they meant everything.",
@@ -131,7 +141,7 @@ const lines = [
 "I don’t regret loving you… not even for a second.",
 "Because for a moment, you were my whole world.",
 "And even today, when I think about those days…",
-"Not all luv stories are meant to stay forever…",
+"Not all love stories are meant to stay forever…",
 "some are just meant to be remembered. 💔"
 ];
 
@@ -195,7 +205,7 @@ function showFinalTyping(){
   type();
 }
 
-// 👉 NEXT BUTTON
+// 👉 NEXT BUTTON (FIXED)
 function showNextButton(){
   let btn = document.createElement("button");
   btn.className = "next-btn";
@@ -205,7 +215,11 @@ function showNextButton(){
     window.location.href = "page5.html";
   };
 
-  document.getElementById("text").appendChild(btn);
+  let container = document.getElementById("text");
+  container.appendChild(btn);
+
+  // 🔥 auto scroll so button dikhe
+  btn.scrollIntoView({ behavior: "smooth" });
 }
 
 </script>
