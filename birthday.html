@@ -13,8 +13,8 @@ body {
   text-align: center;
   overflow: hidden;
 
-  /* ✅ FULL BACKGROUND IMAGE */
-  background: url("photo.jpg.jpg") no-repeat center center/cover;
+  /* ✅ FIXED IMAGE NAME */
+  background: url("photo.jpg") no-repeat center center/cover;
 }
 
 /* 💖 Dark overlay */
@@ -37,7 +37,7 @@ body::before {
   padding: 20px;
 }
 
-/* ❤️ Heartbeat animation */
+/* ❤️ Heartbeat */
 h1 {
   font-size: 55px;
   animation: beat 1s infinite;
@@ -111,7 +111,6 @@ h1 {
 @keyframes fall {
   to { transform: translateY(110vh) rotate(360deg); }
 }
-
 </style>
 </head>
 
@@ -142,14 +141,13 @@ h1 {
     Allah always keeps you happy
   </div>
 
-  <!-- 💖 NEXT PAGE BUTTON -->
   <button onclick="nextPage()" class="next-btn">
     Let's See Our Best Moments Together💌
   </button>
 </div>
 
-<!-- 🎶 MUSIC -->
-<audio autoplay loop>
+<!-- 🎶 MUSIC FIX -->
+<audio id="music" loop>
   <source src="zaalima.mp3" type="audio/mpeg">
 </audio>
 
@@ -158,7 +156,13 @@ function nextPage(){
   window.location.href = "memories.html";
 }
 
-// 🎈 Balloons
+/* 🔊 PLAY MUSIC ON FIRST CLICK */
+document.body.addEventListener("click", function(){
+  let music = document.getElementById("music");
+  music.play().catch(()=>{});
+}, { once: true });
+
+/* 🎈 Balloons */
 for(let i=0;i<15;i++){
  let b=document.createElement("div");
  b.className="balloon";
@@ -168,7 +172,7 @@ for(let i=0;i<15;i++){
  document.body.appendChild(b);
 }
 
-// 🎊 Confetti
+/* 🎊 Confetti */
 for(let i=0;i<80;i++){
  let c=document.createElement("div");
  c.className="confetti";
