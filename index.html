@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Private ❤️</title>
+<title>Private 💖</title>
 
 <style>
 body {
@@ -11,12 +11,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: black;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   overflow: hidden;
+  background: black;
 }
 
-/* ❤️ BG */
+/* ❤️ Animated Background */
 body::before {
   content: "";
   position: absolute;
@@ -24,7 +24,7 @@ body::before {
   height: 100%;
   background: url("https://i.imgur.com/9bK0K7C.png");
   animation: move 20s linear infinite;
-  opacity: 0.3;
+  opacity: 0.25;
 }
 
 @keyframes move {
@@ -32,70 +32,107 @@ body::before {
   to { background-position: 0 1000px; }
 }
 
-/* BOX */
+/* 💎 BIGGER GLASS BOX */
 .box {
   position: relative;
-  z-index: 2;
-  background: rgba(0,0,0,0.6);
-  padding: 40px;
-  border-radius: 20px;
+  z-index: 1;
+  background: rgba(255, 105, 180, 0.15);
+  backdrop-filter: blur(20px);
+  padding: 60px 50px;   /* 👉 bigger box */
+  border-radius: 30px;
   text-align: center;
+  box-shadow: 0 0 50px rgba(255,105,180,0.8);
+  width: 320px;
 }
 
+/* 💖 TITLE */
 h2 {
-  color: #00ff88;
+  margin-bottom: 25px;
+  color: #ff66b2;
+  font-size: 32px;
 }
 
-/* INPUT */
+/* 🔐 INPUT */
 input {
-  padding: 10px;
-  border-radius: 10px;
+  padding: 14px;
+  width: 100%;
+  border-radius: 12px;
   border: none;
+  outline: none;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 25px;
 }
 
-/* BUTTONS */
+/* 📦 BUTTON CONTAINER */
 .buttons {
   display: flex;
   justify-content: space-between;
-  width: 220px;
-  margin-top: 15px;
 }
 
+/* 🔘 COMMON BUTTON */
 button {
-  width: 45%;
-  padding: 10px;
-  border-radius: 10px;
+  width: 48%;
+  padding: 12px;
   border: none;
+  border-radius: 12px;
+  font-size: 16px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-.cancel { background:#222; color:#ccc; }
-.ok { background:#00ff88; }
+/* ❌ Cancel LEFT */
+.cancel {
+  background: #222;
+  color: #ccc;
+}
+
+.cancel:hover {
+  background: #444;
+  transform: scale(1.1);
+}
+
+/* ✅ OK RIGHT (PINK) */
+.ok {
+  background: linear-gradient(45deg, #ff66b2, #ff1f6b);
+  color: white;
+  box-shadow: 0 0 15px #ff66b2;
+}
+
+.ok:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px #ff66b2;
+}
 </style>
 </head>
 
 <body>
 
 <div class="box">
-<h2>Enter Password 💚</h2>
+  <h2>Enter Password 💚</h2>
 
-<input type="password" id="password"><br>
+  <input type="password" id="password" placeholder="Enter password">
 
-<div class="buttons">
-<button class="cancel" onclick="history.back()">Cancel</button>
-<button class="ok" onclick="checkPassword()">OK</button>
-</div>
+  <div class="buttons">
+    <button class="cancel" onclick="goBack()">Cancel</button>
+    <button class="ok" onclick="checkPassword()">OK</button>
+  </div>
 </div>
 
 <script>
-function checkPassword(){
-  let input = document.getElementById("password").value;
+function checkPassword() {
+  const correctPassword = "khusheadii";
+  const input = document.getElementById("password").value;
 
-  if(input === "khusheadii"){
+  if (input === correctPassword) {
     window.location.href = "birthday.html";
   } else {
     alert("Wrong Password ❌");
   }
+}
+
+function goBack() {
+  window.history.back();
 }
 </script>
 
