@@ -2,98 +2,210 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Final 💔</title>
+<title>Memories 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Raleway:wght@300&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
-  height: 100vh;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Playfair Display', serif;
   overflow: hidden;
+  font-family: 'Raleway', sans-serif;
   color: white;
 }
 
-/* 💔 TEXT */
-#text {
-  font-size: 40px;
+/* 🎬 VIDEO FULL FIX */
+video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(60%) blur(2px);
+}
+
+/* 💖 OVERLAY */
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  letter-spacing: 2px;
 }
 
-/* ✨ FADE ANIMATION */
-.fade {
+/* 💬 TEXT BOX */
+.text {
+  max-width: 850px;
+  padding: 20px;
+}
+
+/* ✨ LINE STYLE */
+.line {
+  font-size: 24px;
+  font-family: 'Playfair Display', serif;
+  margin: 14px 0;
+  line-height: 1.6;
+  color: #f5f5f5;
+}
+
+/* 🎬 WORD ANIMATION */
+.word {
   opacity: 0;
-  animation: fadeIn 3s forwards;
+  display: inline-block;
+  transform: translateY(10px);
+  animation: fadeWord 0.6s forwards;
+  margin-right: 5px;
 }
 
-@keyframes fadeIn {
-  to { opacity: 1; }
+@keyframes fadeWord {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* 💓 HEARTBEAT */
-.heart {
-  color: #ff4d6d;
-  animation: beat 1s infinite;
+/* 💔 FINAL TYPING */
+.typing {
+  font-size: 30px;
+  margin-top: 30px;
+  font-family: 'Playfair Display', serif;
+  border-right: 2px solid white;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-@keyframes beat {
-  50% { transform: scale(1.2); }
+/* 🔘 NEXT BUTTON */
+.next-btn {
+  margin-top: 40px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.next-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #ff4d6d;
 }
 </style>
 </head>
 
 <body>
 
-<div id="text"></div>
+<!-- 🎬 VIDEO -->
+<video id="video" autoplay loop playsinline muted>
+  <source src="video.mp4" type="video/mp4">
+</video>
+
+<!-- 💖 TEXT -->
+<div class="overlay">
+  <div class="text" id="text"></div>
+</div>
 
 <script>
 
-const messages = [
-  "Maybe we were not meant to stay forever…",
-  "But you were the most beautiful part of my life…",
-  "And you always will be…",
-  "💔"
+// 🔊 click to unmute (mobile fix)
+document.body.addEventListener("click", function(){
+  let v = document.getElementById("video");
+  v.muted = false;
+  v.play();
+});
+
+// 💌 LINES
+const lines = [
+"Some memories re not meant to fade away…💖",
+"They stay quietly in the heart no matter how far we go.",
+"We may not talk anymore we may not be together…",
+"but those moments we shared were real and they meant everything.",
+"Every smile, every laugh, every little fight…",
+"they are still alive somewhere inside me.",
+"I don’t regret loving you… not even for a second.",
+"Because for a moment, you were my whole world.",
+"And even today, when I think about those days…",
+"Not all luv stories are meant to stay forever…",
+"some are just meant to be remembered. 💔"
 ];
 
 let i = 0;
 
-function showText(){
-  if(i < messages.length){
-    let div = document.createElement("div");
-    div.className = "fade";
+// 🎬 SHOW LINES
+function showLine(){
+  if(i < lines.length){
 
-    if(messages[i] === "💔"){
-      div.innerHTML = '<span class="heart">💔</span>';
-    } else {
-      div.innerText = messages[i];
+    let lineDiv = document.createElement("div");
+    lineDiv.className = "line";
+    document.getElementById("text").appendChild(lineDiv);
+
+    let words = lines[i].split(" ");
+    let w = 0;
+
+    function showWord(){
+      if(w < words.length){
+        let span = document.createElement("span");
+        span.className = "word";
+        span.innerText = words[w] + " ";
+        lineDiv.appendChild(span);
+        w++;
+        setTimeout(showWord, 120);
+      } else {
+        i++;
+        setTimeout(showLine, 600);
+      }
     }
 
-    document.getElementById("text").appendChild(div);
-    i++;
-    setTimeout(showText, 3000);
+    showWord();
+
   } else {
-    finalMessage();
+    showFinalTyping();
   }
 }
 
-showText();
+showLine();
 
-function finalMessage(){
-  setTimeout(()=>{
-    document.body.innerHTML = `
-      <div style="
-        font-size:50px;
-        text-align:center;
-        animation: fadeIn 3s forwards;
-      ">
-        THE END 💔
-      </div>
-    `;
-  },2000);
+// 💔 FINAL TEXT
+function showFinalTyping(){
+  let container = document.getElementById("text");
+
+  let div = document.createElement("div");
+  div.className = "typing";
+  container.appendChild(div);
+
+  let text = "I still miss you…";
+  let j = 0;
+
+  function type(){
+    if(j < text.length){
+      div.innerHTML += text[j];
+      j++;
+      setTimeout(type, 90);
+    } else {
+      showNextButton();
+    }
+  }
+
+  type();
+}
+
+// 👉 NEXT BUTTON
+function showNextButton(){
+  let btn = document.createElement("button");
+  btn.className = "next-btn";
+  btn.innerText = "Next ➝";
+
+  btn.onclick = function(){
+    window.location.href = "page4.html";
+  };
+
+  document.getElementById("text").appendChild(btn);
 }
 
 </script>
