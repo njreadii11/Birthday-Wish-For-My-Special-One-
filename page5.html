@@ -14,7 +14,7 @@ body {
   color: white;
 }
 
-/* 📸 SLIDER */
+/* 📸 SLIDES */
 .slide {
   position: absolute;
   width: 100%;
@@ -88,12 +88,22 @@ let text = document.getElementById("text");
 let music = document.getElementById("music");
 
 let index = 0;
+let started = false;
 
-/* 🔊 music fix */
-document.body.addEventListener("click", () => {
-  music.play().catch(()=>{});
-}, { once: true });
+/* 🔊 PERFECT AUDIO FIX */
+function startMusic(){
+  if(!started){
+    music.volume = 0.7;   // smooth sound
+    music.play().catch(()=>{});
+    started = true;
+  }
+}
 
+/* 👉 click anywhere to start song */
+document.body.addEventListener("click", startMusic);
+
+
+/* 💬 QUOTES */
 const quotes = [
   "Some memories stay forever… 💔",
   "Every moment with you meant everything…",
@@ -104,12 +114,12 @@ const quotes = [
 
 text.innerText = quotes[0];
 
+/* ⏱ SLIDE CHANGE */
 let interval = setInterval(() => {
 
   slides[index].classList.remove("active");
   index++;
 
-  /* ❗ FIX: jab last slide finish ho */
   if(index >= slides.length){
     clearInterval(interval);
     showEnd();
@@ -125,12 +135,14 @@ let interval = setInterval(() => {
 /* 🎬 FINAL SCREEN */
 function showEnd(){
   setTimeout(() => {
+
     document.body.innerHTML = `
       <div class="end-screen">
-        <div class="end-text">💔</div>
+        <div class="end-text">I still miss you… 💔</div>
         <button class="replay" onclick="location.href='index.html'">Replay</button>
       </div>
     `;
+
   }, 2000);
 }
 </script>
