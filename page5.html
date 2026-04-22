@@ -50,8 +50,10 @@ body {
 }
 
 .end-text {
-  font-size: 50px;
+  font-size: 45px;
   margin-bottom: 20px;
+  text-align: center;
+  padding: 0 20px;
 }
 
 .replay {
@@ -77,8 +79,8 @@ body {
 <!-- 💔 TEXT -->
 <div class="text" id="text"></div>
 
-<!-- 🎶 MUSIC -->
-<audio id="music" preload="auto" loop>
+<!-- 🎶 MUSIC (AUTO + FIXED) -->
+<audio id="music" autoplay loop muted>
   <source src="thodi der.mp3" type="audio/mpeg">
 </audio>
 
@@ -88,37 +90,17 @@ let text = document.getElementById("text");
 let music = document.getElementById("music");
 
 let index = 0;
-let started = false;
 
-/* 🔊 SUPER FIXED AUDIO START */
-function startMusic(){
-  if(!started){
+/* 🔊 PAGE LOAD PE PLAY (MUTED) */
+window.addEventListener("load", () => {
+  music.play().catch(()=>{});
+});
 
-    music.muted = false;
-    music.volume = 0.8;
-    music.currentTime = 0;
-
-    let playPromise = music.play();
-
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          console.log("Music started");
-        })
-        .catch(() => {
-          alert("Tap again to start music 🎵");
-        });
-    }
-
-    started = true;
-  }
-}
-
-/* ✅ MULTIPLE EVENTS = 100% WORK */
-document.body.addEventListener("click", startMusic);
-document.body.addEventListener("touchstart", startMusic);
-document.body.addEventListener("keydown", startMusic);
-
+/* 🔊 FIRST CLICK PE SOUND ON */
+document.body.addEventListener("click", () => {
+  music.muted = false;
+  music.play().catch(()=>{});
+}, { once: true });
 
 /* 💬 QUOTES */
 const quotes = [
@@ -148,14 +130,16 @@ let interval = setInterval(() => {
 
 }, 3000);
 
-
 /* 🎬 FINAL SCREEN */
 function showEnd(){
   setTimeout(() => {
 
     document.body.innerHTML = `
       <div class="end-screen">
-        <div class="end-text">Many Many More Happy Returns Of The Day HAPPY BIRTHDAY MY LUV💔 I hope life gives uh all the happiness uh deserve🎂</div>
+        <div class="end-text">
+          Happy Birthday… 💔<br>
+          I hope life gives you all the happiness you deserve 🎂
+        </div>
         <button class="replay" onclick="location.href='index.html'">Replay</button>
       </div>
     `;
