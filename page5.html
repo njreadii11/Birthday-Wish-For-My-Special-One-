@@ -46,13 +46,43 @@ body {
   padding: 0 20px;
 }
 
-/* 🎬 FINAL FADE */
+/* 🎬 FADE */
 .fade-out {
   animation: fadeOut 3s forwards;
 }
 
 @keyframes fadeOut {
   to { opacity: 0; }
+}
+
+/* 💔 END SCREEN */
+.end-screen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: black;
+  color: white;
+}
+
+.end-text {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.replay {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.replay:hover {
+  transform: scale(1.1);
 }
 </style>
 </head>
@@ -71,16 +101,22 @@ body {
 <!-- 💔 TEXT -->
 <div class="text" id="text">Some memories stay forever… 💔</div>
 
-<!-- 🎶 OPTIONAL MUSIC -->
-<audio id="music" autoplay loop>
+<!-- 🎶 MUSIC FIX -->
+<audio id="music" loop>
   <source src="sad.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 let slides = document.querySelectorAll(".slide");
 let text = document.getElementById("text");
+let music = document.getElementById("music");
 
 let index = 0;
+
+/* 🔊 autoplay fix */
+document.body.addEventListener("click", function(){
+  music.play().catch(()=>{});
+}, { once: true });
 
 /* 💬 Quotes */
 const quotes = [
@@ -111,17 +147,9 @@ function endScene(){
 
   setTimeout(()=>{
     document.body.innerHTML = `
-      <div style="
-        height:100vh;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        background:black;
-        color:white;
-        font-size:50px;
-        text-align:center;
-      ">
-        THE END 💔
+      <div class="end-screen">
+        <div class="end-text">THE END 💔</div>
+        <button class="replay" onclick="location.href='index.html'">🔁 Replay</button>
       </div>
     `;
   },3000);
