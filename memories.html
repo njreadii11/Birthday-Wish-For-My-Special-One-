@@ -16,7 +16,7 @@ body {
   color: white;
 }
 
-/* 🎬 VIDEO */
+/* 🎬 VIDEO (NO SOUND EVER) */
 video {
   position: fixed;
   top: 50%;
@@ -49,14 +49,13 @@ video {
   padding: 20px;
 }
 
-/* ✨ LINE (NO ANIMATION NOW) */
+/* ✨ LINE */
 .line {
   font-size: 24px;
   font-family: 'Playfair Display', serif;
   margin: 14px 0;
   line-height: 1.6;
-  opacity: 1;   /* fixed */
-  transform: none; /* no movement */
+  opacity: 1;
 }
 
 /* 🔘 NEXT BUTTON */
@@ -79,13 +78,13 @@ video {
 
 <body>
 
-<!-- 🎬 VIDEO -->
+<!-- 🎬 VIDEO (MUTED ALWAYS) -->
 <video id="video" autoplay loop playsinline muted>
   <source src="video.mp4" type="video/mp4">
 </video>
 
-<!-- 🎶 MUSIC -->
-<audio id="music" loop>
+<!-- 🎶 ONLY ONE SONG -->
+<audio id="music" loop preload="auto">
   <source src="chavan-sohneya.mp3" type="audio/mpeg">
 </audio>
 
@@ -101,24 +100,33 @@ video {
 
 let started = false;
 
-/* 🔊 START MEDIA */
-function startMedia(){
+/* 🔊 FORCE START MUSIC ONLY */
+function startAudioOnly(){
   if(!started){
-    let v = document.getElementById("video");
-    let m = document.getElementById("music");
+    let music = document.getElementById("music");
 
-    v.muted = false;
-    v.play().catch(()=>{});
+    music.pause();
+    music.currentTime = 0;
+    music.volume = 0.9;
 
-    m.volume = 0.8;
-    m.play().catch(()=>{});
+    let playPromise = music.play();
+
+    if(playPromise !== undefined){
+      playPromise.catch(() => {
+        setTimeout(() => {
+          music.play().catch(()=>{});
+        }, 500);
+      });
+    }
 
     started = true;
   }
 }
 
-document.body.addEventListener("click", startMedia);
-window.addEventListener("load", startMedia);
+/* AUTO TRY */
+window.addEventListener("load", startAudioOnly);
+setTimeout(startAudioOnly, 500);
+setTimeout(startAudioOnly, 1500);
 
 /* 💌 TEXT */
 const lines = [
@@ -132,26 +140,20 @@ const lines = [
 "I lost you… nd somehow, I lost myself too",
 "You moved on like I was nothing… I’m still stuck on us",
 "I wish I could forget you… but you’re everywhere",
-"You were my peace… now you’re my silence",
-"I’m surrounded by people… but I still feel alone",
-"Some people don’t leave… they stay in ur mind forever",
-"I learned how to smile… while breaking inside",
-"I gave uh all of me… uh gave me memories",
-"I wish we had one more chance… just one",
 "I never stopped loving you…💔"
 ];
 
-/* 🧾 SHOW ALL AT ONCE (NO ANIMATION) */
+/* SHOW TEXT */
 let container = document.getElementById("text");
 
-lines.forEach(txt => {
+lines.forEach(t => {
   let div = document.createElement("div");
   div.className = "line";
-  div.innerText = txt;
+  div.innerText = t;
   container.appendChild(div);
 });
 
-/* 👉 NEXT PAGE */
+/* 👉 NEXT */
 function goNext(){
   window.location.href = "page5.html";
 }
