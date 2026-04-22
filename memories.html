@@ -16,7 +16,6 @@ body {
   color: white;
 }
 
-/* 🎬 VIDEO (NO SOUND EVER) */
 video {
   position: fixed;
   top: 50%;
@@ -29,7 +28,6 @@ video {
   filter: brightness(60%) blur(2px);
 }
 
-/* 💖 OVERLAY */
 .overlay {
   position: relative;
   z-index: 2;
@@ -43,22 +41,18 @@ video {
   padding: 20px;
 }
 
-/* 💬 TEXT */
 .text {
   max-width: 850px;
   padding: 20px;
 }
 
-/* ✨ LINE */
 .line {
   font-size: 24px;
   font-family: 'Playfair Display', serif;
   margin: 14px 0;
   line-height: 1.6;
-  opacity: 1;
 }
 
-/* 🔘 NEXT BUTTON */
 .next-fixed {
   position: fixed;
   bottom: 20px;
@@ -76,60 +70,37 @@ video {
 </style>
 </head>
 
-<body>
+<body onclick="startAudioOnly()">
 
-<!-- 🎬 VIDEO (MUTED ALWAYS) -->
-<video id="video" autoplay loop playsinline muted>
+<video autoplay loop playsinline muted>
   <source src="video.mp4" type="video/mp4">
 </video>
 
-<!-- 🎶 ONLY ONE SONG -->
 <audio id="music" loop preload="auto">
   <source src="chavan-sohneya.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 💖 TEXT -->
 <div class="overlay">
   <div class="text" id="text"></div>
 </div>
 
-<!-- 👉 NEXT -->
 <button class="next-fixed" onclick="goNext()">Next ➝</button>
 
 <script>
 
 let started = false;
 
-/* 🔊 FORCE START MUSIC ONLY */
 function startAudioOnly(){
   if(!started){
     let music = document.getElementById("music");
-
-    music.pause();
-    music.currentTime = 0;
     music.volume = 0.9;
 
-    let playPromise = music.play();
-
-    if(playPromise !== undefined){
-      playPromise.catch(() => {
-        setTimeout(() => {
-          music.play().catch(()=>{});
-        }, 500);
-      });
-    }
-
+    music.play().catch(() => {});
     started = true;
   }
 }
 
-/* AUTO TRY */
-window.addEventListener("load", startAudioOnly);
-setTimeout(startAudioOnly, 500);
-setTimeout(startAudioOnly, 1500);
-
-/* 💌 TEXT */
-const lines = [
+/* ✅ FIXED (duplicate removed) */
 const lines = [
 "I still remember everything… like it just happened yesterday💔",
 "I miss the version of uh that loved me",
@@ -151,9 +122,7 @@ const lines = [
 "I never stopped loving you",
 "I really miss you so much…💔"
 ];
-];
 
-/* SHOW TEXT */
 let container = document.getElementById("text");
 
 lines.forEach(t => {
