@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Memories 💖</title>
+<title>Memories💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Raleway:wght@300&display=swap" rel="stylesheet">
 
@@ -57,7 +57,7 @@ video {
   line-height: 1.6;
 }
 
-/* 🎬 WORD ANIMATION */
+/* 💔 WORD ANIMATION */
 .word {
   opacity: 0;
   display: inline-block;
@@ -71,13 +71,6 @@ video {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* 💔 FINAL TEXT */
-.typing {
-  font-size: 30px;
-  margin-top: 30px;
-  border-right: 2px solid white;
 }
 
 /* 🔘 NEXT BUTTON */
@@ -95,10 +88,6 @@ video {
   z-index: 999;
   box-shadow: 0 0 15px #ff4d6d;
 }
-
-.next-fixed:hover {
-  transform: scale(1.1);
-}
 </style>
 </head>
 
@@ -109,9 +98,9 @@ video {
   <source src="video.mp4" type="video/mp4">
 </video>
 
-<!-- 🎶 AUDIO -->
+<!-- 🎶 ONLY ONE SONG -->
 <audio id="music" loop>
-  <source src="sad.mp3" type="audio/mpeg">
+  <source src="chavan-sohneya.mp3" type="audio/mpeg">
 </audio>
 
 <!-- 💖 TEXT -->
@@ -119,14 +108,14 @@ video {
   <div class="text" id="text"></div>
 </div>
 
-<!-- 👉 NEXT BUTTON (ALWAYS VISIBLE) -->
+<!-- 👉 NEXT -->
 <button class="next-fixed" onclick="goNext()">Next ➝</button>
 
 <script>
 
-// 🔊 CLICK = START VIDEO + AUDIO (IMPORTANT FIX)
 let started = false;
 
+/* 🔊 START VIDEO + MUSIC TOGETHER */
 function startMedia(){
   if(!started){
     let v = document.getElementById("video");
@@ -135,6 +124,7 @@ function startMedia(){
     v.muted = false;
     v.play().catch(()=>{});
 
+    m.volume = 0.8;
     m.play().catch(()=>{});
 
     started = true;
@@ -142,9 +132,9 @@ function startMedia(){
 }
 
 document.body.addEventListener("click", startMedia);
+window.addEventListener("load", startMedia);
 
-
-// 💌 TEXT LINES
+/* 💌 TEXT */
 const lines = [
 "I still remember everything… like it just happened yesterday💔",
 "We didn’t just end… we slowly faded away",
@@ -193,32 +183,10 @@ function showLine(){
 
     showWord();
 
-  } else {
-    showFinalTyping();
   }
 }
 
 showLine();
-
-/* 💔 FINAL LINE */
-function showFinalTyping(){
-  let div = document.createElement("div");
-  div.className = "typing";
-  document.getElementById("text").appendChild(div);
-
-  let text = "You deserve all the happiness May Allah give uh all the luv you deserve🤲";
-  let j = 0;
-
-  function type(){
-    if(j < text.length){
-      div.innerHTML += text[j];
-      j++;
-      setTimeout(type, 90);
-    }
-  }
-
-  type();
-}
 
 /* 👉 NEXT PAGE */
 function goNext(){
