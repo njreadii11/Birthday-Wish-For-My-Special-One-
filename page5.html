@@ -15,12 +15,6 @@ body {
 }
 
 /* 📸 SLIDER */
-.slider {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
 .slide {
   position: absolute;
   width: 100%;
@@ -28,7 +22,7 @@ body {
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transition: opacity 2s ease-in-out;
+  transition: opacity 1.5s ease-in-out;
 }
 
 .slide.active {
@@ -43,19 +37,9 @@ body {
   text-align: center;
   font-size: 28px;
   text-shadow: 0 0 10px black;
-  padding: 0 20px;
 }
 
-/* 🎬 FADE */
-.fade-out {
-  animation: fadeOut 3s forwards;
-}
-
-@keyframes fadeOut {
-  to { opacity: 0; }
-}
-
-/* 💔 END SCREEN */
+/* 🎬 END SCREEN */
 .end-screen {
   height: 100vh;
   display: flex;
@@ -63,7 +47,6 @@ body {
   align-items: center;
   flex-direction: column;
   background: black;
-  color: white;
 }
 
 .end-text {
@@ -73,16 +56,11 @@ body {
 
 .replay {
   padding: 12px 25px;
-  border: none;
   border-radius: 30px;
+  border: none;
   background: #ff4d6d;
   color: white;
   cursor: pointer;
-  font-size: 16px;
-}
-
-.replay:hover {
-  transform: scale(1.1);
 }
 </style>
 </head>
@@ -90,18 +68,16 @@ body {
 <body>
 
 <!-- 📸 SLIDES -->
-<div class="slider">
-  <div class="slide active" style="background-image:url('photo1.jpg')"></div>
-  <div class="slide" style="background-image:url('photo2.jpg')"></div>
-  <div class="slide" style="background-image:url('photo3.jpg')"></div>
-  <div class="slide" style="background-image:url('photo4.jpg')"></div>
-  <div class="slide" style="background-image:url('photo5.jpg')"></div>
-</div>
+<div class="slide active" style="background-image:url('photo1.jpg')"></div>
+<div class="slide" style="background-image:url('photo2.jpg')"></div>
+<div class="slide" style="background-image:url('photo3.jpg')"></div>
+<div class="slide" style="background-image:url('photo4.jpg')"></div>
+<div class="slide" style="background-image:url('photo5.jpg')"></div>
 
 <!-- 💔 TEXT -->
-<div class="text" id="text">Some memories stay forever… 💔</div>
+<div class="text" id="text"></div>
 
-<!-- 🎶 MUSIC FIX -->
+<!-- 🎶 MUSIC -->
 <audio id="music" loop>
   <source src="sad.mp3" type="audio/mpeg">
 </audio>
@@ -113,50 +89,50 @@ let music = document.getElementById("music");
 
 let index = 0;
 
-/* 🔊 autoplay fix */
-document.body.addEventListener("click", function(){
+/* 🔊 music fix */
+document.body.addEventListener("click", () => {
   music.play().catch(()=>{});
 }, { once: true });
 
-/* 💬 Quotes */
 const quotes = [
   "Some memories stay forever… 💔",
   "Every moment with you meant everything…",
   "We may be apart… but those days were real…",
   "You were my happiness once…",
-  "And maybe… you always will be…",
-  "I still miss you… 💔"
+  "And maybe… you always will be…"
 ];
 
-function nextSlide(){
-  slides[index].classList.remove("active");
+text.innerText = quotes[0];
 
+let interval = setInterval(() => {
+
+  slides[index].classList.remove("active");
   index++;
 
-  if(index < slides.length){
-    slides[index].classList.add("active");
-    text.innerText = quotes[index];
-  } else {
-    endScene();
+  /* ❗ FIX: jab last slide finish ho */
+  if(index >= slides.length){
+    clearInterval(interval);
+    showEnd();
+    return;
   }
-}
 
-/* 🎬 END SCENE */
-function endScene(){
-  document.body.classList.add("fade-out");
+  slides[index].classList.add("active");
+  text.innerText = quotes[index] || "";
 
-  setTimeout(()=>{
+}, 3000);
+
+
+/* 🎬 FINAL SCREEN */
+function showEnd(){
+  setTimeout(() => {
     document.body.innerHTML = `
       <div class="end-screen">
         <div class="end-text">THE END 💔</div>
-        <button class="replay" onclick="location.href='index.html'">🔁 Replay</button>
+        <button class="replay" onclick="location.href='index.html'">Replay</button>
       </div>
     `;
-  },3000);
+  }, 2000);
 }
-
-/* ⏱ AUTO SLIDE */
-setInterval(nextSlide, 3500);
 </script>
 
 </body>
