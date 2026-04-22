@@ -24,6 +24,7 @@ body {
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
 }
+
 .slide.active {
   opacity: 1;
 }
@@ -47,6 +48,7 @@ body {
   flex-direction: column;
   background: black;
 }
+
 .end-text {
   font-size: 45px;
   margin-bottom: 20px;
@@ -54,7 +56,6 @@ body {
   padding: 0 20px;
 }
 
-/* 🔘 BUTTON */
 .replay {
   padding: 12px 25px;
   border-radius: 30px;
@@ -63,27 +64,10 @@ body {
   color: white;
   cursor: pointer;
 }
-
-/* ✨ TAP TO START */
-.tap {
-  position: absolute;
-  top: 20px;
-  width: 100%;
-  text-align: center;
-  font-size: 16px;
-  opacity: 0.7;
-  animation: blink 1.5s infinite;
-}
-@keyframes blink {
-  50% { opacity: 0.2; }
-}
 </style>
 </head>
 
 <body>
-
-<!-- 🔊 TAP TEXT -->
-<div class="tap">Tap anywhere for sound 🎧</div>
 
 <!-- 📸 SLIDES -->
 <div class="slide active" style="background-image:url('photo1.jpg')"></div>
@@ -96,11 +80,10 @@ body {
 <div class="slide" style="background-image:url('photo8.jpg')"></div>
 <div class="slide" style="background-image:url('photo9.jpg')"></div>
 
-<!-- 💔 TEXT -->
 <div class="text" id="text"></div>
 
 <!-- 🎶 MUSIC -->
-<audio id="music" autoplay loop muted>
+<audio id="music" loop preload="auto">
   <source src="thodi-der.mp3" type="audio/mpeg">
 </audio>
 
@@ -111,41 +94,40 @@ let music = document.getElementById("music");
 
 let index = 0;
 
-/* 🎵 AUTO PLAY (MUTED) */
-window.addEventListener("load", () => {
-  music.play().catch(()=>{});
-});
-
-/* ⚡ TRY AUTO UNMUTE */
-setTimeout(() => {
-  music.muted = false;
-  music.volume = 0.8;
-  music.play().catch(()=>{});
-}, 1000);
-
-/* 👉 USER CLICK = GUARANTEED SOUND */
-document.body.addEventListener("click", () => {
-  music.muted = false;
-  music.play().catch(()=>{});
-}, { once: true });
-
 /* 💬 QUOTES */
 const quotes = [
   "Some memories stay forever… 💔",
-  "Every moment with you meant everything…",
+  "Every moment with uh meant everything…",
   "We may be apart… but those days were real…",
   "You were my happiness once…",
-  "And maybe… you always will be…"
-  "And even now… i still miss you so much…"
-  "Some stories end… but feelings don't…"
-  "You left… but ur memories stayed…"
-  "I tried to forget… but my heart remembers uh everyday everytime…"
-  
+  "And maybe… uh always will be…",
+  "And even now… I still miss uh so much…",
+  "Some stories end… but feelings don't…",
+  "You left… but ur memories stayed…",
+  "I tried to forget… but my heart remembers uh everyday nd everytime…"
 ];
 
 text.innerText = quotes[0];
 
-/* ⏱ SLIDES */
+/* 🎵 AUTO PLAY ATTEMPT (REAL FIX) */
+function playMusic() {
+  music.volume = 0.8;
+  music.play().catch(() => {
+    // retry after tiny delay (browser unlock trick)
+    setTimeout(() => {
+      music.play().catch(()=>{});
+    }, 500);
+  });
+}
+
+/* start instantly */
+window.addEventListener("load", playMusic);
+
+/* extra aggressive retry */
+setTimeout(playMusic, 500);
+setTimeout(playMusic, 1500);
+
+/* ⏱ SLIDESHOW */
 let interval = setInterval(() => {
 
   slides[index].classList.remove("active");
@@ -162,21 +144,19 @@ let interval = setInterval(() => {
 
 }, 3000);
 
-/* 🎬 FINAL SCREEN */
+/* 🎬 END */
 function showEnd(){
   setTimeout(() => {
-
     document.body.innerHTML = `
       <div class="end-screen">
         <div class="end-text">
-           Many many More Happy Returns Of The Day HAPPY BIRTHDAY MY LOVE…<br>
-          I hope life gives uH all the happiness uH deserve🎂 
-          I MISS YOU SO MUCH💔 KHUSH RAHU ABAD RAHU!!
+          Many Many More Happy Returns Of The Day HAPPY BIRTHDAY MY LOVE 🎂<br>
+          I hope life gives uh all happiness uh deserve💖<br>
+          I MISS YOU SO MUCH💔 KHUSH RAHU ABAD RAHU!
         </div>
-        <button class="replay" onclick="location.href='index.html'">Replay</button>
+        <button class="replay" onclick="location.reload()">Replay</button>
       </div>
     `;
-
   }, 2000);
 }
 </script>
