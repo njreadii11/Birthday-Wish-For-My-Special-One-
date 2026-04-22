@@ -7,18 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Raleway:wght@300&display=swap" rel="stylesheet">
 
 <style>
-
-/* 🖤 BODY */
 body {
   margin: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
   font-family: 'Raleway', sans-serif;
   color: white;
-
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 
-/* 🎬 FULL SCREEN VIDEO */
+/* 🎬 VIDEO */
 video {
   position: fixed;
   top: 50%;
@@ -28,7 +26,7 @@ video {
   transform: translate(-50%, -50%);
   object-fit: cover;
   z-index: -1;
-  filter: brightness(60%) blur(3px);
+  filter: brightness(60%) blur(2px);
 }
 
 /* 💖 OVERLAY */
@@ -37,32 +35,26 @@ video {
   z-index: 2;
   width: 100%;
   min-height: 100vh;
-
   background: rgba(0,0,0,0.6);
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   text-align: center;
-  padding: 30px;
+  padding: 20px;
 }
 
-/* 💌 TEXT BOX */
-#text {
+/* 💬 TEXT BOX */
+.text {
   max-width: 850px;
-  font-size: 24px;
-  line-height: 1.8;
-  color: #f5f5f5;
-
-  max-height: 80vh;
-  overflow-y: auto;
+  padding: 20px;
 }
 
 /* ✨ LINE */
 .line {
-  margin: 15px 0;
+  font-size: 24px;
   font-family: 'Playfair Display', serif;
+  margin: 14px 0;
+  line-height: 1.6;
 }
 
 /* 🎬 WORD ANIMATION */
@@ -81,38 +73,32 @@ video {
   }
 }
 
-/* 💔 FINAL TEXT */
+/* 💔 FINAL */
 .typing {
   font-size: 30px;
   margin-top: 30px;
   border-right: 2px solid white;
-  white-space: normal;
 }
 
-/* 🔘 NEXT BUTTON */
-.next-btn {
-  display: block;
-  margin: 50px auto;
-  padding: 14px 30px;
-
+/* 🔘 FIXED NEXT BUTTON */
+.next-fixed {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 25px;
   border: none;
   border-radius: 30px;
-
-  background: linear-gradient(45deg, #ff4d6d, #ff1f4d);
+  background: #ff4d6d;
   color: white;
-
-  font-size: 18px;
   cursor: pointer;
-
+  font-size: 16px;
+  z-index: 999;
   box-shadow: 0 0 15px #ff4d6d;
-  transition: 0.3s;
 }
 
-.next-btn:hover {
+.next-fixed:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 25px #ff4d6d;
 }
-
 </style>
 </head>
 
@@ -125,30 +111,34 @@ video {
 
 <!-- 💖 TEXT -->
 <div class="overlay">
-  <div id="text"></div>
+  <div class="text" id="text"></div>
 </div>
+
+<!-- ✅ NEXT BUTTON (ALWAYS VISIBLE) -->
+<button class="next-fixed" onclick="goNext()">Next ➝</button>
 
 <script>
 
-// 🔊 CLICK TO ENABLE SOUND
+// 🔊 click to unmute
 document.body.addEventListener("click", function(){
   let v = document.getElementById("video");
   v.muted = false;
-  v.play().catch(()=>{});
-}, { once: true });
+  v.play();
+});
 
 // 💌 TEXT
 const lines = [
 "Some memories are not meant to fade away… 💖",
-"They stay quietly in the heart no matter how far we go.",
-"We may not talk anymore we may not be together…",
-"but those moments we shared were real and they meant everything.",
+"They stay quietly in the heart, no matter how far we go.",
+"We may not talk anymore, we may not be together…",
+"but those moments we shared were real, and they meant everything.",
 "Every smile, every laugh, every little fight…",
 "they are still alive somewhere inside me.",
 "I don’t regret loving you… not even for a second.",
 "Because for a moment, you were my whole world.",
 "And even today, when I think about those days…",
-"Not all love stories are meant to stay forever…",
+"I don’t feel pain… I feel something beautiful.",
+"Because not all love stories are meant to stay forever…",
 "some are just meant to be remembered. 💔"
 ];
 
@@ -187,7 +177,7 @@ function showLine(){
 
 showLine();
 
-// 💔 FINAL TEXT + BUTTON
+/* 💔 FINAL TEXT */
 function showFinalTyping(){
   let container = document.getElementById("text");
 
@@ -202,32 +192,17 @@ function showFinalTyping(){
     if(j < text.length){
       div.innerHTML += text[j];
       j++;
-      setTimeout(type, 80);
-    } else {
-      showNextButton();
+      setTimeout(type, 90);
     }
   }
 
   type();
 }
 
-// 👉 NEXT BUTTON
-function showNextButton(){
-  let btn = document.createElement("button");
-  btn.className = "next-btn";
-  btn.innerText = "Next ➝";
-
-  btn.onclick = function(){
-    window.location.href = "page5.html";
-  };
-
-  document.getElementById("text").appendChild(btn);
-
-  btn.scrollIntoView({ behavior: "smooth" });
+/* 👉 NEXT PAGE */
+function goNext(){
+  window.location.href = "page5.html";
 }
-
-// 🔥 FAILSAFE
-setTimeout(showNextButton, 12000);
 
 </script>
 
