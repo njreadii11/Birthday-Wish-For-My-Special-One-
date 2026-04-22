@@ -53,6 +53,24 @@ video {
   line-height: 1.6;
 }
 
+/* 🎵 PLAY BUTTON */
+.play-btn {
+  position: fixed;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  background: #00c853;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  z-index: 999;
+  box-shadow: 0 0 15px #00c853;
+}
+
+/* 👉 NEXT BUTTON */
 .next-fixed {
   position: fixed;
   bottom: 20px;
@@ -70,7 +88,7 @@ video {
 </style>
 </head>
 
-<body onclick="startAudioOnly()">
+<body>
 
 <video autoplay loop playsinline muted>
   <source src="video.mp4" type="video/mp4">
@@ -84,23 +102,29 @@ video {
   <div class="text" id="text"></div>
 </div>
 
+<!-- 🎵 TAP TO PLAY -->
+<button class="play-btn" id="playBtn" onclick="playMusic()">Tap to Play Song 🎵</button>
+
+<!-- 👉 NEXT -->
 <button class="next-fixed" onclick="goNext()">Next ➝</button>
 
 <script>
 
-let started = false;
+let music = document.getElementById("music");
+let playBtn = document.getElementById("playBtn");
 
-function startAudioOnly(){
-  if(!started){
-    let music = document.getElementById("music");
-    music.volume = 0.9;
-
-    music.play().catch(() => {});
-    started = true;
-  }
+/* 🎵 PLAY FUNCTION */
+function playMusic(){
+  music.volume = 0.9;
+  music.play().then(() => {
+    playBtn.innerText = "Playing 🎶";
+    playBtn.style.background = "#888";
+  }).catch(() => {
+    playBtn.innerText = "Tap again 🔊";
+  });
 }
 
-/* ✅ FIXED (duplicate removed) */
+/* 💌 TEXT */
 const lines = [
 "I still remember everything… like it just happened yesterday💔",
 "I miss the version of uh that loved me",
