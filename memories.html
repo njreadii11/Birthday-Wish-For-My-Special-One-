@@ -49,28 +49,14 @@ video {
   padding: 20px;
 }
 
-/* ✨ LINE */
+/* ✨ LINE (NO ANIMATION NOW) */
 .line {
   font-size: 24px;
   font-family: 'Playfair Display', serif;
   margin: 14px 0;
   line-height: 1.6;
-}
-
-/* 💔 WORD ANIMATION */
-.word {
-  opacity: 0;
-  display: inline-block;
-  transform: translateY(10px);
-  animation: fadeWord 0.6s forwards;
-  margin-right: 5px;
-}
-
-@keyframes fadeWord {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  opacity: 1;   /* fixed */
+  transform: none; /* no movement */
 }
 
 /* 🔘 NEXT BUTTON */
@@ -98,7 +84,7 @@ video {
   <source src="video.mp4" type="video/mp4">
 </video>
 
-<!-- 🎶 ONLY ONE SONG -->
+<!-- 🎶 MUSIC -->
 <audio id="music" loop>
   <source src="chavan-sohneya.mp3" type="audio/mpeg">
 </audio>
@@ -115,7 +101,7 @@ video {
 
 let started = false;
 
-/* 🔊 START VIDEO + MUSIC TOGETHER */
+/* 🔊 START MEDIA */
 function startMedia(){
   if(!started){
     let v = document.getElementById("video");
@@ -155,38 +141,15 @@ const lines = [
 "I never stopped loving you…💔"
 ];
 
-let i = 0;
+/* 🧾 SHOW ALL AT ONCE (NO ANIMATION) */
+let container = document.getElementById("text");
 
-function showLine(){
-  if(i < lines.length){
-
-    let lineDiv = document.createElement("div");
-    lineDiv.className = "line";
-    document.getElementById("text").appendChild(lineDiv);
-
-    let words = lines[i].split(" ");
-    let w = 0;
-
-    function showWord(){
-      if(w < words.length){
-        let span = document.createElement("span");
-        span.className = "word";
-        span.innerText = words[w] + " ";
-        lineDiv.appendChild(span);
-        w++;
-        setTimeout(showWord, 120);
-      } else {
-        i++;
-        setTimeout(showLine, 700);
-      }
-    }
-
-    showWord();
-
-  }
-}
-
-showLine();
+lines.forEach(txt => {
+  let div = document.createElement("div");
+  div.className = "line";
+  div.innerText = txt;
+  container.appendChild(div);
+});
 
 /* 👉 NEXT PAGE */
 function goNext(){
