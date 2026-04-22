@@ -43,7 +43,7 @@ video {
   padding: 20px;
 }
 
-/* 💬 TEXT BOX */
+/* 💬 TEXT */
 .text {
   max-width: 850px;
   padding: 20px;
@@ -73,14 +73,14 @@ video {
   }
 }
 
-/* 💔 FINAL */
+/* 💔 FINAL TEXT */
 .typing {
   font-size: 30px;
   margin-top: 30px;
   border-right: 2px solid white;
 }
 
-/* 🔘 FIXED NEXT BUTTON */
+/* 🔘 NEXT BUTTON */
 .next-fixed {
   position: fixed;
   bottom: 20px;
@@ -109,37 +109,55 @@ video {
   <source src="video.mp4" type="video/mp4">
 </video>
 
+<!-- 🎶 AUDIO -->
+<audio id="music" loop>
+  <source src="sad.mp3" type="audio/mpeg">
+</audio>
+
 <!-- 💖 TEXT -->
 <div class="overlay">
   <div class="text" id="text"></div>
 </div>
 
-<!-- ✅ NEXT BUTTON (ALWAYS VISIBLE) -->
+<!-- 👉 NEXT BUTTON (ALWAYS VISIBLE) -->
 <button class="next-fixed" onclick="goNext()">Next ➝</button>
 
 <script>
 
-// 🔊 click to unmute
-document.body.addEventListener("click", function(){
-  let v = document.getElementById("video");
-  v.muted = false;
-  v.play();
-});
+// 🔊 CLICK = START VIDEO + AUDIO (IMPORTANT FIX)
+let started = false;
 
-// 💌 TEXT
+function startMedia(){
+  if(!started){
+    let v = document.getElementById("video");
+    let m = document.getElementById("music");
+
+    v.muted = false;
+    v.play().catch(()=>{});
+
+    m.play().catch(()=>{});
+
+    started = true;
+  }
+}
+
+document.body.addEventListener("click", startMedia);
+
+
+// 💌 TEXT LINES
 const lines = [
-"Some memories are not meant to fade away… 💖",
-"They stay quietly in the heart, no matter how far we go.",
-"We may not talk anymore, we may not be together…",
-"but those moments we shared were real, and they meant everything.",
-"Every smile, every laugh, every little fight…",
-"they are still alive somewhere inside me.",
-"I don’t regret loving you… not even for a second.",
-"Because for a moment, you were my whole world.",
-"And even today, when I think about those days…",
-"I don’t feel pain… I feel something beautiful.",
-"Because not all love stories are meant to stay forever…",
-"some are just meant to be remembered. 💔"
+"I gave you everything… and still lost you 💔",
+"You were my home… now I feel homeless",
+"I still wait for a message… I know will never come",
+"You left… but my heart didn’t get the news",
+"I pretend I’m okay… but I’m not even close",
+"You were my forever… I was just your moment",
+"I still love you… and that’s the problem",
+"I wish I could hate you… but I can’t",
+"You broke me… and I’m still loving you",
+"I miss you… in ways I can’t explain",
+"I see you in everything… and it hurts",
+"I stopped telling people how I feel… they never understood"
 ];
 
 let i = 0;
@@ -164,7 +182,7 @@ function showLine(){
         setTimeout(showWord, 120);
       } else {
         i++;
-        setTimeout(showLine, 600);
+        setTimeout(showLine, 700);
       }
     }
 
@@ -177,15 +195,13 @@ function showLine(){
 
 showLine();
 
-/* 💔 FINAL TEXT */
+/* 💔 FINAL LINE */
 function showFinalTyping(){
-  let container = document.getElementById("text");
-
   let div = document.createElement("div");
   div.className = "typing";
-  container.appendChild(div);
+  document.getElementById("text").appendChild(div);
 
-  let text = "I still miss you…";
+  let text = "I never stopped loving you… I just stopped showing it 💔";
   let j = 0;
 
   function type(){
